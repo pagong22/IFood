@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Colour1"
+    tools:context=".UserLogin.SignUpExtension">
+
+    <Button
+        android:id="@+id/signUpButton2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="38dp"
+        android:backgroundTint="@color/Colour2"
+        android:includeFontPadding="false"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:text="Confirm"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Update Profile"
+        android:textColorHint="#000000"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginBottom="25dp"
+        android:background="@color/Colour2"
+        app:layout_constraintBottom_toTopOf="@+id/signUpButton2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+        <EditText
+            android:id="@+id/signUpName"
+            android:layout_width="309dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/img_1"
+            android:ems="10"
+            android:hint="Name"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="10dp"
+            android:textColorHint="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/signUp_Bio2"
+            android:layout_width="328dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="60dp"
+            android:background="@color/white"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Add Bio Here"
+            android:inputType="textMultiLine"
+            app:layout_constraintEnd_toEndOf="@+id/signUpName"
+            app:layout_constraintStart_toStartOf="@+id/signUpName"
+            app:layout_constraintTop_toBottomOf="@+id/signUpName" />
+
+        <Button
+            android:id="@+id/signUp_ChooseProfile"
+            android:layout_width="156dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="61dp"
+            android:backgroundTint="@color/Colour1"
+            android:includeFontPadding="false"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:text="Profile Icon"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/signUp_ImagePlaceholder2"
+            app:layout_constraintTop_toBottomOf="@+id/signUp_Bio2" />
+
+        <ImageView
+            android:id="@+id/signUp_ImagePlaceholder2"
+            android:layout_width="111dp"
+            android:layout_height="93dp"
+            app:layout_constraintBottom_toBottomOf="@+id/signUp_ChooseProfile"
+            app:layout_constraintEnd_toStartOf="@+id/signUp_ChooseProfile"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/signUp_ChooseProfile"
+            app:srcCompat="@drawable/ic_android_black_24dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

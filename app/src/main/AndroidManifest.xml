@@ -13,6 +13,41 @@
         android:theme="@style/Theme.IFood"
         tools:targetApi="31">
         <activity
+            android:name=".RecipeSaved"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".RecipeAdd"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".RecipePopUp"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Recipe.RecipeMain"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".MainRecipe"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Test.test_URLLink"
             android:exported="true">
             <meta-data
@@ -22,13 +57,6 @@
         <activity
             android:name=".Test.Test_GetInformation"
             android:exported="true">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".MainRecipe"
-            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

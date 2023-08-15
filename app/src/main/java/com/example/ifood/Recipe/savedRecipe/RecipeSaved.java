@@ -1,4 +1,4 @@
-package com.example.ifood.Recipe;
+package com.example.ifood.Recipe.savedRecipe;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.ifood.R;
 
-public class MainRecipe extends AppCompatActivity {
+public class RecipeSaved extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_recipe);
+        setContentView(R.layout.activity_recipe_saved);
     }
 }

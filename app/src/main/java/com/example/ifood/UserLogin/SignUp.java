@@ -27,7 +27,6 @@ public class SignUp extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
 
-        EditText Name = findViewById(R.id.SignUpName);
         EditText Email = findViewById(R.id.SignUpEmail);
         EditText Password = findViewById(R.id.SignUpPassword);
         Button Confirm = findViewById(R.id.signUpButton);
@@ -39,9 +38,6 @@ public class SignUp extends AppCompatActivity {
 
                 String userEmail = Email.getText().toString();
                 String userPassword = Password.getText().toString();
-                String userName = Name.getText().toString();
-
-
                 signUpFirebase(userEmail,userPassword);
 
 

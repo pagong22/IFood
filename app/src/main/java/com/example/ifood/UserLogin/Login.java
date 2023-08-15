@@ -17,6 +17,7 @@ import com.example.ifood.MainActivity;
 import com.example.ifood.MainFeed.MainFeed;
 import com.example.ifood.Profile.Profile;
 import com.example.ifood.R;
+import com.example.ifood.Test.Test_GetInformation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -109,7 +110,7 @@ public class Login extends AppCompatActivity {
 
                             Toast.makeText(Login.this,
                                     "Login Successful", Toast.LENGTH_LONG).show();
-                            Intent i = new Intent(Login.this, Profile.class);
+                            Intent i = new Intent(Login.this, Test_GetInformation.class);
                             startActivity(i);
                             finish();
 

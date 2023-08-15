@@ -13,6 +13,20 @@
         android:theme="@style/Theme.IFood"
         tools:targetApi="31">
         <activity
+            android:name=".Test.test_URLLink"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Test.Test_GetInformation"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".MainRecipe"
             android:exported="false">
             <meta-data
@@ -112,7 +126,7 @@
         </activity>
         <activity
             android:name=".Profile.Profile"
-            android:exported="false">
+            android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -126,7 +140,7 @@
         </activity>
         <activity
             android:name=".UserLogin.Login"
-            android:exported="false">
+            android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

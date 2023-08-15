@@ -52,34 +52,17 @@
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <EditText
-            android:id="@+id/SignUpName"
-            android:layout_width="309dp"
-            android:layout_height="54dp"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/img_1"
-            android:ems="10"
-            android:hint="Name"
-            android:inputType="textEmailAddress"
-            android:paddingLeft="10dp"
-            android:textColorHint="#000000"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
             android:id="@+id/SignUpEmail"
             android:layout_width="309dp"
             android:layout_height="54dp"
-            android:layout_marginTop="32dp"
             android:background="@drawable/img_1"
             android:ems="10"
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:paddingLeft="10dp"
             android:textColorHint="#000000"
-            app:layout_constraintEnd_toEndOf="@+id/SignUpName"
-            app:layout_constraintStart_toStartOf="@+id/SignUpName"
-            app:layout_constraintTop_toBottomOf="@+id/SignUpName" />
+            tools:layout_editor_absoluteX="19dp"
+            tools:layout_editor_absoluteY="118dp" />
 
         <EditText
             android:id="@+id/SignUpPassword"

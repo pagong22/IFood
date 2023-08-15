@@ -20,9 +20,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.ifood.Profile.Profile;
 import com.example.ifood.R;
+import com.example.ifood.Test.Test_GetInformation;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -43,6 +48,7 @@ public class SignUpExtension extends AppCompatActivity {
 
 
     ImageView ImageHolder;
+    Uri selectedImageUri;
 
 
 
@@ -57,8 +63,6 @@ public class SignUpExtension extends AppCompatActivity {
         Button Confirm = findViewById(R.id.signUpButton2);
 
         Button ChooseProfile = findViewById(R.id.signUp_ChooseProfile);
-        EditText DisplayNameInput = findViewById(R.id.signUpName);
-        EditText BioInput = findViewById(R.id.signUp_Bio2);
         ImageHolder = findViewById(R.id.signUp_ImagePlaceholder2);
 
 
@@ -73,9 +77,9 @@ public class SignUpExtension extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             // Name, email address, and profile photo Url
-            String name = user.getDisplayName();
-            String email = user.getEmail();
-            Uri photoUrl = user.getPhotoUrl();
+//            String name = user.getDisplayName();
+//            String email = user.getEmail();
+//            Uri photoUrl = user.getPhotoUrl();
             uid = user.getUid();
 
         }
@@ -102,25 +106,22 @@ public class SignUpExtension extends AppCompatActivity {
         Confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String getDisplayName = String.valueOf(DisplayNameInput.getText());
 
-                //Saved into firebase AUTHENTICATION
-                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                        .setDisplayName(getDisplayName)
-                        //.setPhotoUri(Uri.parse(selectedImageUri))
-                        .build();
+                //On confirm click saves the selected image into the cloud storage
+                uploadImageToFirebase(selectedImageUri);
+                updateProfileRTDB();
 
-                user.updateProfile(profileUpdates)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Log.d(TAG, "User profile updated.");
-                                }
-                            }
-                        });
+
+                Intent intent = new Intent(SignUpExtension.this, Profile.class);
+                startActivity(intent);
+                finish();
+
             }
         });
+
+
+
+
 
 
     }
@@ -144,11 +145,9 @@ public class SignUpExtension extends AppCompatActivity {
 
     private void uploadImageToFirebase(Uri contentUri) {
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-        StorageReference imageRef = storageRef.child("Users/").child(uid + UUID.randomUUID().toString() + ".jpg");
+        StorageReference imageRef = storageRef.child("Users/").child(uid +"/" + "UserProfie" + ".jpg");
 
-        TextView code = findViewById(R.id.textView13);
-        code.setText(UUID.randomUUID().toString());
-
+        //Uploading Image to firebase storage
         UploadTask uploadTask = imageRef.putFile(contentUri);
         uploadTask.addOnSuccessListener(taskSnapshot -> {
             // Handle successful upload
@@ -157,6 +156,9 @@ public class SignUpExtension extends AppCompatActivity {
             // Handle failed upload
             Log.e(TAG, "Image upload failed: " + e.getMessage());
         });
+
+
+
     }
 
     private void LaunchGallery(){
@@ -170,17 +172,88 @@ public class SignUpExtension extends AppCompatActivity {
                         if (result.getResultCode() == Activity.RESULT_OK) {
                             Intent data = result.getData();
                             if (data != null) {
-                                Uri selectedImageUri = data.getData();
+                                selectedImageUri = data.getData();
                                 String uriString = selectedImageUri.toString();
-                                uriCode.setText(uriString);
-                                System.out.println(uriString + "==@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-                                imageView.setImageURI(selectedImageUri);
-
-                                //Uploads the selected image to firebase
-                                uploadImageToFirebase(selectedImageUri);
+                                //uriCode.setText(uriString);
+                              //  System.out.println(uriString + "==@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                                ImageHolder.setImageURI(selectedImageUri);
 
                             }
                         }
+                    }
+                });
+
+    }
+
+    public void updateUserProfile(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        //get edit text and store the value of displayname
+        EditText DisplayNameInput = findViewById(R.id.signUpName);
+        String getDisplayName = String.valueOf(DisplayNameInput.getText());
+
+
+
+
+        //get Bio and stores it into Real time database
+        EditText BioInput = findViewById(R.id.signUp_Bio2);
+        String getUserBio = String.valueOf(BioInput.getText());
+
+
+
+
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(String.valueOf(DisplayNameInput))
+                .build();
+
+        user.updateProfile(profileUpdates)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "User profile updated.");
+                        }
+                    }
+                });
+    }
+
+    public void updateProfileRTDB(){
+
+        //get edit text and store the value of displayname
+        EditText DisplayNameInput = findViewById(R.id.signUpName);
+        String getDisplayName = String.valueOf(DisplayNameInput.getText());
+
+        //get Bio and stores it into Real time database
+        EditText BioInput = findViewById(R.id.signUp_Bio2);
+        String getUserBio = String.valueOf(BioInput.getText());
+
+        DatabaseReference mDatabase;
+// ...
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        mDatabase.child("Users").child(uid).child("DisplayName").setValue(getDisplayName).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(SignUpExtension.this, "Successful", Toast.LENGTH_SHORT).show();
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(SignUpExtension.this, "Failed", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+        mDatabase.child("Users").child(uid).child("Bio").setValue(getUserBio).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(SignUpExtension.this, "Successful", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(SignUpExtension.this, "Failed", Toast.LENGTH_SHORT).show();
                     }
                 });
 

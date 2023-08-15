@@ -34,6 +34,7 @@ public class PhotoPicker extends AppCompatActivity {
     StorageReference storageRef = storage.getReference();
     private ActivityResultLauncher<Intent> galleryLauncher;
     String uid;
+    Uri selectedImageUri;
 
 
 
@@ -78,6 +79,9 @@ public class PhotoPicker extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                //Uploads the selected image to firebase
+                uploadImageToFirebase(selectedImageUri);
+
             }
         });
     }
@@ -111,14 +115,13 @@ public class PhotoPicker extends AppCompatActivity {
                         if (result.getResultCode() == Activity.RESULT_OK) {
                             Intent data = result.getData();
                             if (data != null) {
-                                Uri selectedImageUri = data.getData();
+                                selectedImageUri = data.getData();
                                 String uriString = selectedImageUri.toString();
                                 uriCode.setText(uriString);
                                 System.out.println(uriString + "==@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
                                 imageView.setImageURI(selectedImageUri);
 
-                                //Uploads the selected image to firebase
-                                uploadImageToFirebase(selectedImageUri);
+
 
                             }
                         }

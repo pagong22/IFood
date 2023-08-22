@@ -6,12 +6,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.ifood.R;
 import com.google.android.play.integrity.internal.t;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -26,6 +29,9 @@ public class RecipeMain extends AppCompatActivity {
 
     String PassID;
 
+    List<Meal> meals = new ArrayList<>();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +44,12 @@ public class RecipeMain extends AppCompatActivity {
         seafoodButton = findViewById(R.id.recipeSeafood);
         userButton = findViewById(R.id.recipeUser);
 
+
+
         chickenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            chickenButton();
+//            chickenButton();
             }
         });
 
@@ -64,38 +72,44 @@ public class RecipeMain extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+
+
             }
         });
+
+    }
+
+    private void setUpModelClass(){
 
     }
 
     //methods
 
-    public void chickenButton(){
-        // ... [Your Retrofit initialization code]
-
-        Call<MealResponse> call = ChickenApi.getMeals();
-        call.enqueue(new Callback<MealResponse>() {
-            @Override
-            public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    List<Meal> meals = response.body().getMeals();
-                    PassID = meals.get(0).getIdMeal();
-
-                    // Initialize RecyclerView and set its adapter
-                    RecyclerView recyclerView = findViewById(R.id.recycler_view);
-                    MealAdapter adapter = new MealAdapter(meals);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(RecipeMain.this));
-                    recyclerView.setAdapter(adapter);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<MealResponse> call, Throwable t) {
-                // Handle failure
-            }
-        });
-    }
+//    public void chickenButton(){
+//        // ... [Your Retrofit initialization code]
+//
+//        Call<MealResponse> call = ChickenApi.getMeals();
+//        call.enqueue(new Callback<MealResponse>() {
+//            @Override
+//            public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
+//                if (response.isSuccessful() && response.body() != null) {
+//                    List<Meal> meals = response.body().getMeals();
+//                    PassID = meals.get(0).getIdMeal();
+//
+//                    // Initialize RecyclerView and set its adapter
+//                    RecyclerView recyclerView = findViewById(R.id.recycler_view);
+//                    MealAdapter adapter = new MealAdapter(meals);
+//                    recyclerView.setLayoutManager(new LinearLayoutManager(RecipeMain.this));
+//                    recyclerView.setAdapter(adapter);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<MealResponse> call, Throwable t) {
+//                // Handle failure
+//            }
+//        });
+//    }
 
 
 
@@ -112,11 +126,18 @@ public class RecipeMain extends AppCompatActivity {
             @Override
             public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    List<Meal> meals = response.body().getMeals();
+                    meals = response.body().getMeals();
                     PassID = meals.get(0).getIdMeal();
-                    for (Meal meal : meals) {
-                        Toast.makeText(RecipeMain.this, meal.getStrMeal(), Toast.LENGTH_SHORT).show();
-                    }
+
+                    ListView listView = findViewById(R.id.my_listview);
+
+//                    for (int i = 0; i < meals.size(); i++) {
+//                        //Toast.makeText(RecipeMain.this, meals.getStrMeal(), Toast.LENGTH_SHORT).show();
+//                        ArrayAdapter<Meal> adapter = new ArrayAdapter<>(RecipeMain.this, android.R.layout.simple_list_item_1, meals.get(i).getStrMeal());
+//                        listView.setAdapter(adapter);
+//                    }
+
+
                 } else {
                 }
             }
@@ -142,7 +163,7 @@ public class RecipeMain extends AppCompatActivity {
             @Override
             public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    List<Meal> meals = response.body().getMeals();
+                   meals = response.body().getMeals();
                     PassID = meals.get(0).getIdMeal();
                     for (Meal meal : meals) {
                         Toast.makeText(RecipeMain.this, meal.getStrMeal(), Toast.LENGTH_SHORT).show();
@@ -152,7 +173,6 @@ public class RecipeMain extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<MealResponse> call, Throwable t) {
-                // Handle failure
             }
         });
 

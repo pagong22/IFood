@@ -110,7 +110,7 @@ public class Login extends AppCompatActivity {
 
                             Toast.makeText(Login.this,
                                     "Login Successful", Toast.LENGTH_LONG).show();
-                            Intent i = new Intent(Login.this, Test_GetInformation.class);
+                            Intent i = new Intent(Login.this, Profile.class);
                             startActivity(i);
                             finish();
 

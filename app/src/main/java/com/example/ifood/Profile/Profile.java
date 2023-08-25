@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.ifood.MainFeed.MainFeed;
 import com.example.ifood.R;
 import com.example.ifood.UserLogin.Login;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -50,7 +51,6 @@ public class Profile extends AppCompatActivity {
         displayUserDetails();
 
 
-
         Button LogoutButton = findViewById(R.id.signoutButton);
         LogoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +61,18 @@ public class Profile extends AppCompatActivity {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
+
+            }
+        });
+
+
+        ImageView backMain = findViewById(R.id.Profile_backButton);
+        backMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Profile.this, MainFeed.class);
+                // Start the TargetActivity
+                startActivity(intent);
 
             }
         });
@@ -93,10 +105,8 @@ public class Profile extends AppCompatActivity {
         Email.setText(email);
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-
 // Create a reference to the specific location you want to read from
         DatabaseReference userRef = mDatabase.child("Users").child(uid);
-
 // Set up a listener to read the data
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -121,17 +131,13 @@ public class Profile extends AppCompatActivity {
 
 
         //cloud storage
-                StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
         storageRef.child("Users/"+uid+"/"+"UserProfie.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-
-        //storageRef.child("Users/EoTqgUBvX6QTyfQawGbOS4PiabG2/UserProfie.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 // Got the download URL for 'users/me/profile.jpg'
-
                 ImageView imageHolder = findViewById(R.id.Profile_UserIcon);
                 Picasso.get().load(uri.toString()).into(imageHolder);
-
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

@@ -1,10 +1,10 @@
 package com.example.ifood.ShoppingList;
 
-public class reminderModel {
+public class shoppingList_Model {
     String Name;
-    int Quantity;
+    String Quantity;
 
-    public reminderModel(String name, int quantity) {
+    public shoppingList_Model(String name, String quantity) {
         Name = name;
         Quantity = quantity;
     }
@@ -13,7 +13,7 @@ public class reminderModel {
         return Name;
     }
 
-    public int getQuantity() {
+    public String getQuantity() {
         return Quantity;
     }
 }

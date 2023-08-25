@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.ifood.MainActivity;
 import com.example.ifood.MainFeed.MainFeed;
+import com.example.ifood.MainFeed.Post.MainFeedPost;
 import com.example.ifood.Profile.Profile;
 import com.example.ifood.R;
 import com.example.ifood.Test.Test_GetInformation;
@@ -110,7 +111,7 @@ public class Login extends AppCompatActivity {
 
                             Toast.makeText(Login.this,
                                     "Login Successful", Toast.LENGTH_LONG).show();
-                            Intent i = new Intent(Login.this, Profile.class);
+                            Intent i = new Intent(Login.this, MainFeedPost.class);
                             startActivity(i);
                             finish();
 

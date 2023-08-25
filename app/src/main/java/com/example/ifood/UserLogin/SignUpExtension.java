@@ -22,6 +22,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ifood.MainFeed.MainFeed;
+import com.example.ifood.MainFeed.Post.MainFeedPost;
 import com.example.ifood.Profile.Profile;
 import com.example.ifood.R;
 import com.example.ifood.Test.Test_GetInformation;
@@ -112,7 +114,7 @@ public class SignUpExtension extends AppCompatActivity {
                 updateProfileRTDB();
 
 
-                Intent intent = new Intent(SignUpExtension.this, Profile.class);
+                Intent intent = new Intent(SignUpExtension.this, MainFeed.class);
                 startActivity(intent);
                 finish();
 

@@ -70,8 +70,8 @@ public class shoppingList_Adapter extends RecyclerView.Adapter<shoppingList_Adap
 
         public ItemViewHolder(View itemView) {
             super(itemView);
-            nameTextView = itemView.findViewById(R.id.nameTextView);
-            quantityTextView = itemView.findViewById(R.id.quantityTextView);
+            nameTextView = itemView.findViewById(R.id.mainFeed_name);
+            quantityTextView = itemView.findViewById(R.id.asdads);
         }
 
     }

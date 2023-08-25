@@ -41,8 +41,6 @@ public class ShoppingList_Main extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerViewShoppingList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
         adapter = new shoppingList_Adapter(itemList);
         recyclerView.setAdapter(adapter);
 

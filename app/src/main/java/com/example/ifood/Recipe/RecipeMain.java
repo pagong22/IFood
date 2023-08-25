@@ -6,13 +6,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.ifood.R;
-import com.google.android.play.integrity.internal.t;
+import com.example.ifood.ShoppingList.shoppingList_Adapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +24,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RecipeMain extends AppCompatActivity {
 
     Button chickenButton, beefButton, seafoodButton, userButton;
-
     String PassID;
-
     List<Meal> meals = new ArrayList<>();
-
 
 
     @Override
@@ -38,28 +33,20 @@ public class RecipeMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_main);
 
-
         chickenButton = findViewById(R.id.recipeChicken);
         beefButton = findViewById(R.id.recipeBeef);
         seafoodButton = findViewById(R.id.recipeSeafood);
         userButton = findViewById(R.id.recipeUser);
 
+        RecyclerView recipeRecyclerView;
+
+//        recipeRecyclerView = findViewById(R.id.recipe_recyclerView);
+//        recipeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        adapter = new shoppingList_Adapter(itemList);
+//        recyclerView.setAdapter(adapter);
 
 
-        chickenButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//            chickenButton();
-            }
-        });
 
-        beefButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                beefButton();
-
-            }
-        });
 
         seafoodButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,20 +55,51 @@ public class RecipeMain extends AppCompatActivity {
             }
         });
 
-        userButton.setOnClickListener(new View.OnClickListener() {
+    }
+
+
+    public void seaFoodButton(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://www.themealdb.com/api/json/v1/1/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        SeafoodApi SeafoodApi = retrofit.create(SeafoodApi.class);
+        Call<MealResponse> call = SeafoodApi.getMeals();
+        call.enqueue(new Callback<MealResponse>() {
             @Override
-            public void onClick(View view) {
+            public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    //store meals in meals list
+                    meals = response.body().getMeals();
 
+                }
+            }
 
-
+            @Override
+            public void onFailure(Call<MealResponse> call, Throwable t) {
             }
         });
 
     }
 
-    private void setUpModelClass(){
 
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //methods
 
@@ -129,7 +147,7 @@ public class RecipeMain extends AppCompatActivity {
                     meals = response.body().getMeals();
                     PassID = meals.get(0).getIdMeal();
 
-                    ListView listView = findViewById(R.id.my_listview);
+                    ListView listView = findViewById(R.id.recipe_recyclerView);
 
 //                    for (int i = 0; i < meals.size(); i++) {
 //                        //Toast.makeText(RecipeMain.this, meals.getStrMeal(), Toast.LENGTH_SHORT).show();
@@ -150,31 +168,4 @@ public class RecipeMain extends AppCompatActivity {
 
     }
 
-    public void seaFoodButton(){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://www.themealdb.com/api/json/v1/1/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        SeafoodApi SeafoodApi = retrofit.create(SeafoodApi.class);
-
-        Call<MealResponse> call = SeafoodApi.getMeals();
-        call.enqueue(new Callback<MealResponse>() {
-            @Override
-            public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                   meals = response.body().getMeals();
-                    PassID = meals.get(0).getIdMeal();
-                    for (Meal meal : meals) {
-                        Toast.makeText(RecipeMain.this, meal.getStrMeal(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<MealResponse> call, Throwable t) {
-            }
-        });
-
-    }
 }

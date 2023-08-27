@@ -89,10 +89,14 @@ public class Login extends AppCompatActivity {
                 signIn(userEmail,userPassword);
 
 
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("message");
+//                FirebaseDatabase database = FirebaseDatabase.getInstance();
+//                DatabaseReference myRef = database.getReference("message");
+//
+//                myRef.setValue("Hello, World!");
 
-                myRef.setValue("Hello, World!");
+                Intent i = new Intent(Login.this, MainFeed.class);
+                startActivity(i);
+                finish();
 
 
 
@@ -111,9 +115,7 @@ public class Login extends AppCompatActivity {
 
                             Toast.makeText(Login.this,
                                     "Login Successful", Toast.LENGTH_LONG).show();
-                            Intent i = new Intent(Login.this, MainFeedPost.class);
-                            startActivity(i);
-                            finish();
+
 
                         } else {
                             // If sign in fails, display a message to the user.

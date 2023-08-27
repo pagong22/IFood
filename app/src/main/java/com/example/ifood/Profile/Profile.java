@@ -105,21 +105,17 @@ public class Profile extends AppCompatActivity {
         Email.setText(email);
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-// Create a reference to the specific location you want to read from
         DatabaseReference userRef = mDatabase.child("Users").child(uid);
-// Set up a listener to read the data
+
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get the data from the DataSnapshot
                 String displayName = dataSnapshot.child("DisplayName").getValue(String.class);
                 String bio = dataSnapshot.child("Bio").getValue(String.class);
 
                 DisplayName.setText(displayName);
                 DisplayBio.setText(bio);
 
-                // Use the data (e.g., update the UI)
-                // ...
             }
 
             @Override

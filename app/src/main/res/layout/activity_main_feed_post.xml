@@ -60,4 +60,5 @@
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="@+id/mainFeed_postImg"
         app:layout_constraintStart_toEndOf="@+id/mainFeed_postImg" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

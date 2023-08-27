@@ -26,9 +26,14 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import com.example.ifood.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class googleMaps extends AppCompatActivity implements OnMapReadyCallback, OnInfoWindowClickListener, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
+    private List<Marker> markers = new ArrayList<Marker>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +118,10 @@ public class googleMaps extends AppCompatActivity implements OnMapReadyCallback,
                         .snippet("asdasd " + " ; asdasdd ")
                         .alpha(0.8f)
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+
+        markers.add(milkMarker);
+
+
 
         final LatLng salt = new LatLng(54.57124085365406, -1.2329138769846424);
         Marker saltMarker = mMap.addMarker(

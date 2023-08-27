@@ -46,18 +46,13 @@ public class MainFeedPost extends AppCompatActivity {
 
     long count;
 
-
-
-
     //RTDB reference
     DatabaseReference mDatabase;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_feed_post);
-
 
         //get user icon
         //Firebase getUser ID
@@ -70,8 +65,6 @@ public class MainFeedPost extends AppCompatActivity {
         //cloud storage
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
         storageRef.child("Users/"+uid+"/"+"UserProfie.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-
-            //storageRef.child("Users/EoTqgUBvX6QTyfQawGbOS4PiabG2/UserProfie.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 // Got the download URL for 'users/me/profile.jpg'

@@ -41,12 +41,12 @@ public class InformationPopUp extends AppCompatActivity {
             System.out.println(latitude);
             System.out.println(longitude);
             System.out.println(title);
-            System.out.println(snippet);
+            System.out.println(snippet + "@@@@@@@@@@@@@@@@");
 
 
             SellerName.setText("Test");
             ProductTitle.setText(title);
-            ExpirationDate.setText("Test2");
+            ExpirationDate.setText(snippet);
         }
 
 

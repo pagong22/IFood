@@ -104,7 +104,7 @@
         app:srcCompat="@drawable/back_arrow" />
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/recipePop_Image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -114,26 +114,27 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/textView30"
+        android:id="@+id/recipePop_FoodName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
-        app:layout_constraintStart_toEndOf="@+id/imageView8"
-        app:layout_constraintTop_toTopOf="@+id/imageView8" />
+        app:layout_constraintBottom_toBottomOf="@+id/recipePop_Image"
+        app:layout_constraintStart_toEndOf="@+id/recipePop_Image"
+        app:layout_constraintTop_toTopOf="@+id/recipePop_Image" />
 
     <TextView
-        android:id="@+id/textView31"
+        android:id="@+id/recipePop_Description"
         android:layout_width="362dp"
         android:layout_height="134dp"
         android:layout_marginTop="32dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+        app:layout_constraintTop_toBottomOf="@+id/recipePop_Image" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recipePop_recyclerView"
         android:layout_width="409dp"
         android:layout_height="0dp"
         android:layout_marginStart="1dp"
@@ -143,6 +144,6 @@
         app:layout_constraintBottom_toTopOf="@+id/recipeChicken"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView31" />
+        app:layout_constraintTop_toBottomOf="@+id/recipePop_Description" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -90,8 +90,22 @@
         android:text="Add to Recipe"
         android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/recipePop_Youtube"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/recipePop_Youtube"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:backgroundTint="@color/Colour2"
+        android:text="Add to Recipe"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/recipeChicken" />
 
     <ImageView
         android:id="@+id/imageView5"
@@ -105,8 +119,8 @@
 
     <ImageView
         android:id="@+id/recipePop_Image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="119dp"
+        android:layout_height="123dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -134,7 +148,7 @@
         app:layout_constraintTop_toBottomOf="@+id/recipePop_Image" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recipePop_recyclerView"
+        android:id="@+id/ingredientRecyclerView"
         android:layout_width="409dp"
         android:layout_height="0dp"
         android:layout_marginStart="1dp"

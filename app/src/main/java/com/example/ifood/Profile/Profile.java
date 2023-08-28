@@ -35,13 +35,8 @@ import com.squareup.picasso.Picasso;
 
 public class Profile extends AppCompatActivity {
 
-
     String uid;
     String email;
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

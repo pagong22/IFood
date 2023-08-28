@@ -22,6 +22,9 @@ public class Meal {
     @SerializedName("strYoutube")
     private String strYoutube;
 
+    @SerializedName("strInstructions")
+    private String strInstructions;
+
 
 
     //Ingredients
@@ -144,5 +147,45 @@ public class Meal {
 
     public String getStrIngredient10() {
         return strIngredient10;
+    }
+
+    public String getStrMeasure1() {
+        return strMeasure1;
+    }
+
+    public String getStrMeasure2() {
+        return strMeasure2;
+    }
+
+    public String getStrMeasure3() {
+        return strMeasure3;
+    }
+
+    public String getStrMeasure4() {
+        return strMeasure4;
+    }
+
+    public String getStrMeasure5() {
+        return strMeasure5;
+    }
+
+    public String getStrMeasure6() {
+        return strMeasure6;
+    }
+
+    public String getStrMeasure7() {
+        return strMeasure7;
+    }
+
+    public String getStrMeasure8() {
+        return strMeasure8;
+    }
+
+    public String getStrMeasure9() {
+        return strMeasure9;
+    }
+
+    public String getStrInstructions() {
+        return strInstructions;
     }
 }

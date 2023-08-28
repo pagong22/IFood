@@ -27,17 +27,11 @@ public class ShoppingList_Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_list_main);
 
-//        List<shoppingList_Model> shoppingList = new ArrayList<shoppingList_Model>();
-//
-//        shoppingList.add(new shoppingList_Model("lemon",5));
-//        shoppingList.add(new shoppingList_Model("Strawberry",1));
-//        shoppingList.add(new shoppingList_Model("Beef Mince",2));
-//
-//        Toast.makeText(ShoppingList_Main.this, shoppingList.get(1).getName(), Toast.LENGTH_LONG).show();
-
         itemList.add(new shoppingList_Model("lemon","2"));
         itemList.add(new shoppingList_Model("grapes","5"));
         itemList.add(new shoppingList_Model("orange","3"));
+
+        //Add to RTDB
 
         recyclerView = findViewById(R.id.recyclerViewShoppingList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -49,20 +43,14 @@ public class ShoppingList_Main extends AppCompatActivity {
         EditText insertProduct = findViewById(R.id.getProductName);
         EditText insertQuantity = findViewById(R.id.getQuantity);
 
-//        int productQuantityTemp = 0; // default value
-//        productQuantityTemp = Integer.parseInt(insertQuantity.getText().toString());
 
-
-
+        //Add new Item to Shopping List
         Button addShoppingList = findViewById(R.id.shoppingList_confirm);
-
-
         addShoppingList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String productNameTemp = insertProduct.getText().toString();
                 String insertQuantityTemp = insertQuantity.getText().toString();
-
 
                 itemList.add(new shoppingList_Model(productNameTemp,insertQuantityTemp));
                 // Notify the adapter that the data has changed

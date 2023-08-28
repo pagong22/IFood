@@ -50,10 +50,8 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MealViewHolder
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), RecipePopUp.class);
 
-                intent.putExtra("KEY_NAME", "value");
-                intent.putExtra("KEY_NAME", "value");
-                intent.putExtra("KEY_NAME", "value");
-                intent.putExtra("KEY_NAME", "value");
+                intent.putExtra("FOOD_ID", meal.getIdMeal());
+
 
 
 

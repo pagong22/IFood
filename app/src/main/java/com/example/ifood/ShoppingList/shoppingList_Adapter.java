@@ -1,10 +1,5 @@
 package com.example.ifood.ShoppingList;
 
-/*
-* Recycler View adapter for shopping list
-*
-* */
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,15 +9,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ifood.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
 public class shoppingList_Adapter extends RecyclerView.Adapter<shoppingList_Adapter.ItemViewHolder> {
 
     private List<shoppingList_Model> shoppingList;
+    private String uid;  //gets uid from the main activity
+    private DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference(); // initialize DatabaseReference here
 
-    public shoppingList_Adapter(List<shoppingList_Model> shoppingList) {
+    // Added uid to the constructor
+    public shoppingList_Adapter(List<shoppingList_Model> shoppingList, String uid) {
         this.shoppingList = shoppingList;
+        this.uid = uid;  // set the uid
     }
 
     @NonNull
@@ -34,28 +35,25 @@ public class shoppingList_Adapter extends RecyclerView.Adapter<shoppingList_Adap
 
     @Override
     public void onBindViewHolder(@NonNull shoppingList_Adapter.ItemViewHolder holder, int position) {
-        //gets the object on the array list and transfers it into a new singular object called item
         shoppingList_Model item = shoppingList.get(position);
         holder.nameTextView.setText(item.getName());
         holder.quantityTextView.setText(String.valueOf(item.getQuantity()));
 
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                shoppingList.remove(position);
-//                notifyItemRemoved(position);
                 int currentPosition = holder.getAbsoluteAdapterPosition();
                 if (currentPosition != RecyclerView.NO_POSITION) {
+                    shoppingList_Model itemToDelete = shoppingList.get(currentPosition);
+
                     shoppingList.remove(currentPosition);
                     notifyItemRemoved(currentPosition);
+
+                    DatabaseReference itemToDeleteReference = mDatabaseReference.child("Users").child(uid).child("shoppingList").child(itemToDelete.getName());
+                    itemToDeleteReference.removeValue();
                 }
-
-
-
             }
         });
-
     }
 
     @Override
@@ -63,18 +61,14 @@ public class shoppingList_Adapter extends RecyclerView.Adapter<shoppingList_Adap
         return shoppingList.size();
     }
 
-    public class ItemViewHolder extends RecyclerView.ViewHolder{
+    public class ItemViewHolder extends RecyclerView.ViewHolder {
         TextView nameTextView;
         TextView quantityTextView;
-
 
         public ItemViewHolder(View itemView) {
             super(itemView);
             nameTextView = itemView.findViewById(R.id.mainFeed_name);
             quantityTextView = itemView.findViewById(R.id.asdads);
         }
-
     }
-
-
 }

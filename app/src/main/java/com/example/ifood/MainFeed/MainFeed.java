@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.ifood.MainFeed.Post.MainFeedPost;
 import com.example.ifood.Maps.Confirmation;
 import com.example.ifood.Maps.googleMaps;
+import com.example.ifood.Profile.MenuOption;
 import com.example.ifood.Profile.Profile;
 import com.example.ifood.R;
 import com.example.ifood.ShoppingList.ShoppingList_Main;
@@ -70,8 +71,9 @@ public class MainFeed extends AppCompatActivity {
 
                                 // Reverse the list
                                 Collections.reverse(itemList);
-
                                 adapter.notifyDataSetChanged();
+
+
                             }).addOnFailureListener(exception -> {
                                 // Handle any errors
                             });
@@ -109,7 +111,7 @@ public class MainFeed extends AppCompatActivity {
         ImageView profileButton = findViewById(R.id.nav_profile);
 
         homeButton.setOnClickListener(view -> {
-            Intent intent = new Intent(MainFeed.this, Confirmation.class);
+            Intent intent = new Intent(MainFeed.this, MainFeed.class);
             startActivity(intent);
         });
 
@@ -124,7 +126,7 @@ public class MainFeed extends AppCompatActivity {
         });
 
         profileButton.setOnClickListener(view -> {
-            Intent intent = new Intent(MainFeed.this, Profile.class);
+            Intent intent = new Intent(MainFeed.this, MenuOption.class);
             startActivity(intent);
         });
     }

@@ -6,13 +6,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.ifood.MainFeed.MainFeed;
+import com.example.ifood.Maps.googleMaps;
+import com.example.ifood.Profile.MenuOption;
 import com.example.ifood.R;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -54,7 +59,7 @@ public class ShoppingList_Main extends AppCompatActivity {
         //Get user display name using UID
         DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         DatabaseReference userReference = mDatabaseReference.child("Users");
-        userReference.child("FZeJHns9vfNYlHgSiPZhVWyDv353").child("shoppingList").addListenerForSingleValueEvent(new ValueEventListener() {
+        userReference.child(uid).child("shoppingList").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 //                String displayName = dataSnapshot.getValue(String.class);
@@ -68,12 +73,11 @@ public class ShoppingList_Main extends AppCompatActivity {
                     recyclerView.setLayoutManager(new LinearLayoutManager(ShoppingList_Main.this));
 
                     //pass uid value as well to allow recycler to identify user
-                    adapter = new shoppingList_Adapter(itemList, "FZeJHns9vfNYlHgSiPZhVWyDv353");
+                    adapter = new shoppingList_Adapter(itemList, uid);
                     recyclerView.setAdapter(adapter);
                 }
 
-                System.out.println(itemList.get(0).getName() + "@@@@@@@@@@@@@");
-                System.out.println(itemList.get(0).getQuantity() + "@@@@@@@@@@@@@");
+
 
 
 
@@ -105,7 +109,7 @@ public class ShoppingList_Main extends AppCompatActivity {
 
                 // Push the data to Firebase
 
-                userReference.child("FZeJHns9vfNYlHgSiPZhVWyDv353").child("shoppingList").child(productNameTemp).setValue(insertQuantityTemp);
+                userReference.child(uid).child("shoppingList").child(productNameTemp).setValue(insertQuantityTemp);
 
                 itemList.add(new shoppingList_Model(productNameTemp, insertQuantityTemp));
                 // Notify the adapter that the data has changed
@@ -114,5 +118,36 @@ public class ShoppingList_Main extends AppCompatActivity {
         });
 
 
+        navigationBar();
+
     }
+
+
+    public void navigationBar() {
+        ImageView homeButton = findViewById(R.id.nav_home);
+        ImageView reminderButton = findViewById(R.id.nav_reminder);
+        ImageView mapsButton = findViewById(R.id.nav_maps);
+        ImageView profileButton = findViewById(R.id.nav_profile);
+
+        homeButton.setOnClickListener(view -> {
+            Intent intent = new Intent(ShoppingList_Main.this, MainFeed.class);
+            startActivity(intent);
+        });
+
+        reminderButton.setOnClickListener(view -> {
+            Intent intent = new Intent(ShoppingList_Main.this, ShoppingList_Main.class);
+            startActivity(intent);
+        });
+
+        mapsButton.setOnClickListener(view -> {
+            Intent intent = new Intent(ShoppingList_Main.this, googleMaps.class);
+            startActivity(intent);
+        });
+
+        profileButton.setOnClickListener(view -> {
+            Intent intent = new Intent(ShoppingList_Main.this, MenuOption.class);
+            startActivity(intent);
+        });
+    }
+
 }

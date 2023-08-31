@@ -7,11 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.Toast;
 
-import com.example.ifood.MainFeed.MainFeed;
-import com.example.ifood.MainFeed.MainFeedAdapter;
 import com.example.ifood.R;
 
 import java.util.ArrayList;
@@ -38,7 +34,7 @@ public class RecipeMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_main);
 
-        chickenButton = findViewById(R.id.recipeChicken);
+        chickenButton = findViewById(R.id.recipePop_Youtube);
         beefButton = findViewById(R.id.recipeBeef);
         seafoodButton = findViewById(R.id.recipeSeafood);
         userButton = findViewById(R.id.recipeUser);

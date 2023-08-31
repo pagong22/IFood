@@ -1,10 +1,15 @@
 package com.example.ifood.Recipe.popUp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,6 +17,13 @@ import com.example.ifood.R;
 import com.example.ifood.Recipe.Meal;
 import com.example.ifood.Recipe.MealResponse;
 import com.example.ifood.ShoppingList.shoppingList_Model;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Field;
@@ -29,6 +41,12 @@ public class RecipePopUp extends AppCompatActivity {
     TextView foodName, description;
     ImageView foodThumb;
     RecyclerView popUpRecycleView;
+    List<IngredientModel> ingredientList = new ArrayList<>();
+    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+    String uid;
+
+
+
 
 
 
@@ -74,7 +92,6 @@ public class RecipePopUp extends AppCompatActivity {
 
 
 
-                    List<IngredientModel> ingredientList = new ArrayList<>();
                     for (int i = 1; i <= 10; i++) {
                         try {
                             Method ingredientMethod = meal.getClass().getMethod("getStrIngredient" + i);
@@ -98,6 +115,9 @@ public class RecipePopUp extends AppCompatActivity {
                     ingredientRecyclerView.setLayoutManager(new LinearLayoutManager(RecipePopUp.this));
 
 
+                    btns(meal);
+
+
 
                 }
             }
@@ -107,6 +127,64 @@ public class RecipePopUp extends AppCompatActivity {
                 Toast.makeText(RecipePopUp.this, "Error fetching meal details", Toast.LENGTH_SHORT).show();
             }
         });
+
+
+        Button saveToShopping = findViewById(R.id.recipePop_addShoppingList);
+        saveToShopping.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //save list to RTDB
+
+                for (IngredientModel ingredient : ingredientList){
+                    Toast.makeText(RecipePopUp.this, ingredient.getIngredient(), Toast.LENGTH_SHORT).show();
+
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    if (user != null) {
+                        uid = user.getUid();
+                    }
+
+
+                    DatabaseReference recipeIngredients = mDatabase.child("Users").child(uid).child("shoppingList");
+                    recipeIngredients.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            recipeIngredients.child(ingredient.getIngredient()).setValue(ingredient.getMeasurement());
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            Toast.makeText(RecipePopUp.this, "Failed to add", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+
+                }
+
+
+            }
+        });
+
+
+
+    }
+
+
+    public void btns(Meal meal){
+        Button youtubeBtn = findViewById(R.id.recipePop_Youtube);
+        youtubeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Opens youtube
+
+                String youtubeUrl = meal.getStrYoutube();
+
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl));
+                intent.setPackage("com.google.android.youtube");
+                startActivity(intent);
+            }
+        });
+
     }
 
 

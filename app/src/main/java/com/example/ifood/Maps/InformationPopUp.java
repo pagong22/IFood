@@ -11,7 +11,10 @@ import android.widget.TextView;
 
 import com.example.ifood.R;
 
+import org.w3c.dom.Text;
+
 public class InformationPopUp extends AppCompatActivity {
+    String UIDseller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +25,7 @@ public class InformationPopUp extends AppCompatActivity {
         TextView SellerName = (TextView) findViewById(R.id.popUp_sellerID);
         TextView ProductTitle = (TextView) findViewById(R.id.popUp_Title);
         TextView ExpirationDate = (TextView) findViewById(R.id.popUp_Expiration);
+        TextView BrandName = (TextView) findViewById(R.id.popUp_brand);
         Button BuyButton = (Button) findViewById(R.id.popUp_Buy);
         ImageView BackButton = (ImageView) findViewById(R.id.popUp_BackBtn);
 
@@ -35,23 +39,60 @@ public class InformationPopUp extends AppCompatActivity {
             double longitude = getIntent().getDoubleExtra("LONGITUDE", 99999);
             String title = getIntent().getStringExtra("TITLE");
             String snippet = getIntent().getStringExtra("SNIPPET");
+            System.out.println("*********************************");
+            UIDseller = getIntent().getStringExtra("UID");
+            System.out.println(getIntent().getStringExtra("UID"));
             //The key argument here must match that used in the other activity
 
 
-            System.out.println(latitude);
-            System.out.println(longitude);
-            System.out.println(title);
-            System.out.println(snippet + "@@@@@@@@@@@@@@@@");
+
+            //Split snippet into different variables
+            String[] lines = snippet.split("\n");
+
+            String productName = "";
+            String brand = "";
+            String expiration = "";
+
+            for (String line : lines) {
+                String[] parts = line.split(": ");
+                if (parts.length == 2) {
+                    String key = parts[0].trim();
+                    String value = parts[1].trim();
+
+                    switch (key) {
+                        case "ProductName":
+                            productName = value;
+                            break;
+                        case "Brand":
+                            brand = value;
+                            break;
+                        case "Expiration":
+                            expiration = value;
+                            break;
+                    }
+                }
+            }
+
+            //set snippet into textview
+            System.out.println("ProductName: " + productName);
+            System.out.println("Brand: " + brand);
+            System.out.println("Expiration: " + expiration);
+
+            SellerName.setText(title);
+            ProductTitle.setText(productName);
+            ExpirationDate.setText(expiration);
+            BrandName.setText(brand);
 
 
-            SellerName.setText("Test");
-            ProductTitle.setText(title);
-            ExpirationDate.setText(snippet);
         }
 
 
         BuyButton.setOnClickListener(view -> {
             Intent intent = new Intent(InformationPopUp.this, Confirmation.class);
+
+
+            intent.putExtra("SELLER_UID", UIDseller);
+
 
 
             // Start the TargetActivity

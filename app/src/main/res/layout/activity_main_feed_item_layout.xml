@@ -10,9 +10,10 @@
         android:id="@+id/mainFeed_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Name"
+        android:textStyle="bold|italic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,7 +22,7 @@
         android:layout_width="383dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="24dp"
         android:hint="Type your post here!"
@@ -34,10 +35,18 @@
         android:id="@+id/mainFeed_imgURL"
         android:layout_width="49dp"
         android:layout_height="39dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/mainFeed_name"
         app:layout_constraintStart_toEndOf="@+id/mainFeed_name"
         app:layout_constraintTop_toTopOf="@+id/mainFeed_name"
         app:srcCompat="@drawable/ic_android_black_24dp" />
+
+    <TextView
+        android:id="@+id/textView45"
+        android:layout_width="match_parent"
+        android:layout_height="7px"
+        android:background="#B7F373"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="55dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

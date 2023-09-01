@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.ifood.MainFeed.MainFeed;
@@ -32,6 +33,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 public class Profile extends AppCompatActivity {
 
@@ -71,6 +74,37 @@ public class Profile extends AppCompatActivity {
 
             }
         });
+
+        TextView userReview = findViewById(R.id.profile_AverageReviews);
+        RatingBar barReview = findViewById(R.id.profile_ratingBar);
+        DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference userReviewReference = mDatabaseReference.child("Users").child(uid).child("Reviews");
+        userReviewReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                double sum = 0.0;
+
+                // Loop through the children to get the review values and sum them
+                for (DataSnapshot reviewSnapshot : snapshot.getChildren()) {
+                    Double rating = reviewSnapshot.getValue(Double.class);
+                    sum += rating;
+                }
+
+                // Calculate the average and set it to the TextView
+                double average = sum / snapshot.getChildrenCount();
+                userReview.setText(String.format("%.2f", average));
+
+                // Set the average value to the RatingBar
+                barReview.setRating((float) average);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
 
 
 

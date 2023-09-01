@@ -1,11 +1,16 @@
 package com.example.ifood.MainFeed;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.ifood.MainFeed.Post.MainFeedPost;
 import com.example.ifood.Maps.Confirmation;
 import com.example.ifood.Maps.googleMaps;
+import com.example.ifood.Maps.googleMaps2;
 import com.example.ifood.Profile.MenuOption;
 import com.example.ifood.Profile.Profile;
 import com.example.ifood.R;
@@ -102,7 +108,34 @@ public class MainFeed extends AppCompatActivity {
 
         navigationBar();
 
+
+
+
     }
+
+
+    private BroadcastReceiver dataDeletedReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Toast.makeText(context, "Data has been deleted!", Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Register the receiver
+        registerReceiver(dataDeletedReceiver, new IntentFilter("DATA_DELETED_ACTION"));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Unregister the receiver
+        unregisterReceiver(dataDeletedReceiver);
+    }
+
+
 
     public void navigationBar() {
         ImageView homeButton = findViewById(R.id.nav_home);
@@ -121,7 +154,7 @@ public class MainFeed extends AppCompatActivity {
         });
 
         mapsButton.setOnClickListener(view -> {
-            Intent intent = new Intent(MainFeed.this, googleMaps.class);
+            Intent intent = new Intent(MainFeed.this, googleMaps2.class);
             startActivity(intent);
         });
 

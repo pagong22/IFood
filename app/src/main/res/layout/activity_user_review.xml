@@ -7,7 +7,7 @@
     tools:context=".Maps.UserReview">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/review_SubmitBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
@@ -69,7 +69,7 @@
         android:layout_marginStart="43dp"
         android:layout_marginBottom="87dp"
         android:clickable="false"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/review_SubmitBtn"
         app:layout_constraintStart_toStartOf="@+id/textView24"
         app:layout_constraintTop_toBottomOf="@+id/textView24" />
 

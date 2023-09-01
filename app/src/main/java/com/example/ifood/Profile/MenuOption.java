@@ -6,8 +6,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.example.ifood.MainFeed.MainFeed;
+import com.example.ifood.Maps.googleMaps2;
 import com.example.ifood.R;
 import com.example.ifood.Recipe.RecipeMain;
 import com.example.ifood.ShoppingList.ShoppingList_Main;
@@ -60,7 +62,36 @@ public class MenuOption extends AppCompatActivity {
         });
 
 
-
+        navigationBar();
 
     }
+
+
+    public void navigationBar() {
+        ImageView homeButton = findViewById(R.id.nav_home);
+        ImageView reminderButton = findViewById(R.id.nav_reminder);
+        ImageView mapsButton = findViewById(R.id.nav_maps);
+        ImageView profileButton = findViewById(R.id.nav_profile);
+
+        homeButton.setOnClickListener(view -> {
+            Intent intent = new Intent(MenuOption.this, MainFeed.class);
+            startActivity(intent);
+        });
+
+        reminderButton.setOnClickListener(view -> {
+            Intent intent = new Intent(MenuOption.this, ShoppingList_Main.class);
+            startActivity(intent);
+        });
+
+        mapsButton.setOnClickListener(view -> {
+            Intent intent = new Intent(MenuOption.this, googleMaps2.class);
+            startActivity(intent);
+        });
+
+        profileButton.setOnClickListener(view -> {
+            Intent intent = new Intent(MenuOption.this, MenuOption.class);
+            startActivity(intent);
+        });
+    }
+
 }

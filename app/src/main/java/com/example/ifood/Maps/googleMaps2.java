@@ -22,6 +22,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -133,6 +134,10 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     String displayName = dataSnapshot.getValue(String.class);
 
+
+                                    //get userReview per UID
+                                    double userReview = 4;
+
                                     //display marker
                                     final LatLng markerPosition = new LatLng(lat,lng);
                                     Marker melbourne = mMap.addMarker(
@@ -141,7 +146,9 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
                                                     .title(displayName)
                                                     .snippet("ProductName: " + ProductName + "\n" +
                                                             "Brand: " + brand + "\n" +
-                                                            "Expiration: " + Expiration));
+                                                            "Expiration: " + Expiration)
+                                                    .icon(BitmapDescriptorFactory.defaultMarker(getHueForReview(userReview))));
+                                                    //uses method to determine the colour of marker based on reviews
                                 }
 
                                 @Override
@@ -231,22 +238,23 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
      * */
     @Override
     public boolean onMarkerClick(@NonNull Marker marker) {
-//        Toast.makeText(this, "clicked to next activity",
-//                Toast.LENGTH_SHORT).show();
-//
-//        // Create the Intent to launch the TargetActivity
-//        Intent intent = new Intent(googleMaps2.this, InformationPopUp.class);
-//
-//        //Send marker information to pop up activity
-//        intent.putExtra("LATITUDE",marker.getPosition().latitude);
-//        intent.putExtra("LONGITUDE",marker.getPosition().longitude);
-//        intent.putExtra("TITLE",marker.getTitle());
-//        intent.putExtra("SNIPPET", marker.getSnippet());
-//
-//        // Start the TargetActivity
-//        startActivity(intent);
         return false;
     }
+
+
+    //Change color of marker based on average review
+    public float getHueForReview(double review) {
+        if (review < 3) {
+            return BitmapDescriptorFactory.HUE_RED;
+        } else if (review < 4) {
+            return BitmapDescriptorFactory.HUE_YELLOW;
+        } else {
+            return BitmapDescriptorFactory.HUE_GREEN;
+        }
+    }
+
+
+
 
 
     public void navigationBar() {

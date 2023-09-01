@@ -13,12 +13,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ifood.MainFeed.MainFeed;
+import com.example.ifood.Profile.MenuOption;
 import com.example.ifood.Profile.Profile;
+import com.example.ifood.ShoppingList.ShoppingList_Main;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -40,6 +44,7 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private List<Marker> markers = new ArrayList<Marker>();
+    private String uid;
 
 
     String currentUser;
@@ -64,7 +69,7 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
 
         });
 
-        navigation();
+        navigationBar();
     }
 
     /**
@@ -103,14 +108,13 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
                             System.out.println("00000000000000" + currentUser);
                         }
 
-                        String uid = childSnapshot.getKey();
-                        System.out.println("11111111111111" + uid);
+                        //gets UID of the maps list
+                         uid = childSnapshot.getKey();
 
                         if (uid.equals(currentUser)){
-
                             Toast.makeText(googleMaps2.this, "SAME USER", Toast.LENGTH_SHORT).show();
-
                         }else{
+
                             System.out.println(currentUser + "&&&&&&&&&&&&&&&&&");
                             String latString = (String) childSnapshot.child("lat").getValue();
                             String lngString = (String) childSnapshot.child("lng").getValue();
@@ -124,11 +128,15 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
                             System.out.println(lat);
                             System.out.println(lng);
 
-                            //Get user display name using UID
+                            //Display the maps children in google maps using markers
                             userReference.child(uid).child("DisplayName").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     String displayName = dataSnapshot.getValue(String.class);
+
+
+                                    //get userReview per UID
+                                    double userReview = 4;
 
                                     //display marker
                                     final LatLng markerPosition = new LatLng(lat,lng);
@@ -138,7 +146,9 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
                                                     .title(displayName)
                                                     .snippet("ProductName: " + ProductName + "\n" +
                                                             "Brand: " + brand + "\n" +
-                                                            "Expiration: " + Expiration));
+                                                            "Expiration: " + Expiration)
+                                                    .icon(BitmapDescriptorFactory.defaultMarker(getHueForReview(userReview))));
+                                                    //uses method to determine the colour of marker based on reviews
                                 }
 
                                 @Override
@@ -186,37 +196,7 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
         });
 
 
-
-
-
-
-//
-//        final LatLng melbourneLatLng = new LatLng(54.571975, -1.229416);
-//        Marker melbourne = mMap.addMarker(
-//                new MarkerOptions()
-//                        .position(melbourneLatLng)
-//                        .title("Melbourne")
-//                        .snippet("Jerome\n" + "Milk\n" + "Potato")
-//                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.maps_userlocation)).flat(true));
-//
-//        //melbourne.showInfoWindow();
-//
-//        final LatLng milk = new LatLng(54.56993475841551, -1.227570916709964);
-//        Marker milkMarker = mMap.addMarker(
-//                new MarkerOptions()
-//                        .position(milk)
-//                        .title("Milk")
-//                        .snippet("asdasd " + " ; asdasdd ")
-//                        .alpha(0.8f)
-//                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-//
-//        markers.add(milkMarker);
-
-
-
-
         final LatLng melbourneLatLng = new LatLng(54.571975, -1.229416);
-
         mMap.moveCamera(CameraUpdateFactory.newLatLng(melbourneLatLng));
 
 
@@ -241,6 +221,7 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
         intent.putExtra("LONGITUDE",marker.getPosition().longitude);
         intent.putExtra("TITLE",marker.getTitle());
         intent.putExtra("SNIPPET", marker.getSnippet());
+        intent.putExtra("UID", uid);
 
         // Start the TargetActivity
         startActivity(intent);
@@ -257,34 +238,55 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
      * */
     @Override
     public boolean onMarkerClick(@NonNull Marker marker) {
-//        Toast.makeText(this, "clicked to next activity",
-//                Toast.LENGTH_SHORT).show();
-//
-//        // Create the Intent to launch the TargetActivity
-//        Intent intent = new Intent(googleMaps2.this, InformationPopUp.class);
-//
-//        //Send marker information to pop up activity
-//        intent.putExtra("LATITUDE",marker.getPosition().latitude);
-//        intent.putExtra("LONGITUDE",marker.getPosition().longitude);
-//        intent.putExtra("TITLE",marker.getTitle());
-//        intent.putExtra("SNIPPET", marker.getSnippet());
-//
-//        // Start the TargetActivity
-//        startActivity(intent);
         return false;
     }
 
 
-    public void navigation(){
-        ImageView profile = findViewById(R.id.nav_profile);
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(googleMaps2.this, Profile.class);
-                startActivity(intent);
-            }
+    //Change color of marker based on average review
+    public float getHueForReview(double review) {
+        if (review < 3) {
+            return BitmapDescriptorFactory.HUE_RED;
+        } else if (review < 4) {
+            return BitmapDescriptorFactory.HUE_YELLOW;
+        } else {
+            return BitmapDescriptorFactory.HUE_GREEN;
+        }
+    }
+
+
+
+
+
+    public void navigationBar() {
+        ImageView homeButton = findViewById(R.id.nav_home);
+        ImageView reminderButton = findViewById(R.id.nav_reminder);
+        ImageView mapsButton = findViewById(R.id.nav_maps);
+        ImageView profileButton = findViewById(R.id.nav_profile);
+
+        homeButton.setOnClickListener(view -> {
+            Intent intent = new Intent(googleMaps2.this, MainFeed.class);
+            startActivity(intent);
+        });
+
+        reminderButton.setOnClickListener(view -> {
+            Intent intent = new Intent(googleMaps2.this, ShoppingList_Main.class);
+            startActivity(intent);
+        });
+
+        mapsButton.setOnClickListener(view -> {
+            Intent intent = new Intent(googleMaps2.this, googleMaps.class);
+            startActivity(intent);
+        });
+
+        profileButton.setOnClickListener(view -> {
+            Intent intent = new Intent(googleMaps2.this, MenuOption.class);
+            startActivity(intent);
         });
     }
+
+
+
+
 
 
 }

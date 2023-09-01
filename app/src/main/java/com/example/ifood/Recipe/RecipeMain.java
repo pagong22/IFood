@@ -7,11 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.Toast;
 
-import com.example.ifood.MainFeed.MainFeed;
-import com.example.ifood.MainFeed.MainFeedAdapter;
 import com.example.ifood.R;
 
 import java.util.ArrayList;
@@ -38,7 +34,7 @@ public class RecipeMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_main);
 
-        chickenButton = findViewById(R.id.recipeChicken);
+        chickenButton = findViewById(R.id.recipePop_Youtube);
         beefButton = findViewById(R.id.recipeBeef);
         seafoodButton = findViewById(R.id.recipeSeafood);
         userButton = findViewById(R.id.recipeUser);
@@ -48,22 +44,12 @@ public class RecipeMain extends AppCompatActivity {
         adapter = new MealAdapter(meals);
         recyclerView.setAdapter(adapter);
 
-
-
-
-
-
-
-//        RecyclerView  recipeRecyclerView = findViewById(R.id.recipe_recyclerView);
-//        recipeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        adapter = new shoppingList_Adapter(itemList);
-//        recyclerView.setAdapter(adapter);
-
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://www.themealdb.com/api/json/v1/1/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+
+
         SeafoodApi SeafoodApi = retrofit.create(SeafoodApi.class);
         Call<MealResponse> call = SeafoodApi.getMeals();
         call.enqueue(new Callback<MealResponse>() {
@@ -78,10 +64,6 @@ public class RecipeMain extends AppCompatActivity {
 
                     // Notify the adapter that the data has changed
                     adapter.notifyDataSetChanged();
-
-                    for (int i = 0; i < meals.size(); i++) {
-                        Toast.makeText(RecipeMain.this, meals.get(i).getStrMeal(), Toast.LENGTH_SHORT).show();
-                    }
 
                 }
             }

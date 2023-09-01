@@ -94,9 +94,7 @@ public class Login extends AppCompatActivity {
 //
 //                myRef.setValue("Hello, World!");
 
-                Intent i = new Intent(Login.this, MainFeed.class);
-                startActivity(i);
-                finish();
+
 
 
 
@@ -115,6 +113,9 @@ public class Login extends AppCompatActivity {
 
                             Toast.makeText(Login.this,
                                     "Login Successful", Toast.LENGTH_LONG).show();
+                            Intent i = new Intent(Login.this, MainFeed.class);
+                            startActivity(i);
+                            finish();
 
 
                         } else {

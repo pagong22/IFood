@@ -12,6 +12,34 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IFood"
         tools:targetApi="31">
+        <!-- If this receiver listens for broadcasts sent from the system or from
+             other apps, even other apps that you own, set android:exported to "true". -->
+        <receiver android:name=".MyBroadcastReceiver" android:exported="true">
+            <intent-filter>
+                <action android:name="APP_SPECIFIC_BROADCAST" />
+            </intent-filter>
+        </receiver>
+        <activity
+            android:name=".Profile.itemOnMarket"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Profile.soldProduct"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Profile.MenuOption"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".Maps.googleMaps2"
             android:exported="true">
@@ -57,7 +85,7 @@
         </activity>
         <activity
             android:name=".Recipe.popUp.RecipePopUp"
-            android:exported="false">
+            android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -119,7 +147,7 @@
         </activity>
         <activity
             android:name=".Maps.UserReview"
-            android:exported="false">
+            android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -133,7 +161,7 @@
         </activity>
         <activity
             android:name=".Maps.InformationPopUp"
-            android:exported="false">
+            android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

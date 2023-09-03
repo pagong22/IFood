@@ -11,31 +11,38 @@
         android:id="@+id/shoppingList_confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="31dp"
         android:backgroundTint="@color/Colour2"
         android:text="Add"
         android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerViewShoppingList"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/getQuantity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/getQuantity"
+        app:layout_constraintTop_toTopOf="@+id/getQuantity" />
 
     <EditText
         android:id="@+id/getQuantity"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="20dp"
         android:ems="10"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerViewShoppingList"
-        app:layout_constraintStart_toEndOf="@+id/getProductName" />
+        app:layout_constraintBottom_toBottomOf="@+id/getProductName"
+        app:layout_constraintEnd_toStartOf="@+id/shoppingList_confirm"
+        app:layout_constraintStart_toEndOf="@+id/getProductName"
+        app:layout_constraintTop_toTopOf="@+id/getProductName" />
 
     <EditText
         android:id="@+id/getProductName"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginStart="8dp"
+        android:layout_marginBottom="13dp"
         android:ems="10"
+        android:hint="Product"
         android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerViewShoppingList"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -114,9 +121,11 @@
         android:layout_height="576dp"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/getQuantity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView36" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

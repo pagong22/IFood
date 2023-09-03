@@ -3,7 +3,11 @@ package com.example.ifood.Profile;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +37,6 @@ public class itemOnMarket extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             currentUser = user.getUid();
-            System.out.println(currentUser + "%%%%%%%%%%%%%");
         }
 
         DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference();
@@ -49,7 +52,6 @@ public class itemOnMarket extends AppCompatActivity {
 
                     if (uid.equals(currentUser)){
 
-                        System.out.println(currentUser + "&&&&&&&&&&&&&&&&&");
                         String latString = (String) childSnapshot.child("lat").getValue();
                         String lngString = (String) childSnapshot.child("lng").getValue();
                         double lat = Double.parseDouble(latString);
@@ -60,24 +62,13 @@ public class itemOnMarket extends AppCompatActivity {
                         String brand = String.valueOf(snapshot.child(uid).child("brand").getValue());
 
 
-                        System.out.println(Expiration);
-                        System.out.println(ProductName);
-                        System.out.println(brand);
-                        System.out.println("@@@@@@@@@@@@@@@@");
-
                         TextView brandName = findViewById(R.id.currentItem_Brand);
                         brandName.setText(brand);
 
-                        TextView sellerName = findViewById(R.id.currentItem_Seller);
-                        sellerName.setText("YGUU");
                         TextView expirationDate = findViewById(R.id.currentSeller_Expiration);
                         expirationDate.setText(Expiration);
                         TextView productname = findViewById(R.id.currentItem_ProductName);
                         productname.setText(ProductName);
-
-                    }else{
-
-                        Toast.makeText(itemOnMarket.this, "No Item on market", Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -91,6 +82,15 @@ public class itemOnMarket extends AppCompatActivity {
             }
         });
 
+
+        ImageView backbtn = findViewById(R.id.currentItem_backBtn);
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(itemOnMarket.this, MenuOption.class);
+                startActivity(intent);
+            }
+        });
 
 
 

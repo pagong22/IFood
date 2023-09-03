@@ -82,58 +82,6 @@
             app:srcCompat="@drawable/nav_profile" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
-        android:id="@+id/recipePop_Youtube"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:backgroundTint="@color/Colour2"
-        android:text="Chicken"
-        android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        app:layout_constraintEnd_toStartOf="@+id/recipeBeef"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/recipeBeef"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:backgroundTint="@color/Colour2"
-        android:text="Beef"
-        android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        app:layout_constraintEnd_toStartOf="@+id/recipeSeafood"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/recipePop_Youtube" />
-
-    <Button
-        android:id="@+id/recipeUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:backgroundTint="@color/Colour2"
-        android:text="User"
-        android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/recipeSeafood" />
-
-    <Button
-        android:id="@+id/recipeSeafood"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:backgroundTint="@color/Colour2"
-        android:text="Seafood"
-        android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        app:layout_constraintEnd_toStartOf="@+id/recipeUser"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/recipeBeef" />
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="24dp"
@@ -146,13 +94,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recipe_displayRecycler"
-        android:layout_width="409dp"
-        android:layout_height="595dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/recipePop_Youtube"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />

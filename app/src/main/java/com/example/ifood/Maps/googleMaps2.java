@@ -44,7 +44,8 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private List<Marker> markers = new ArrayList<Marker>();
-    private String uid;
+    private double average;
+
 
 
     String currentUser;
@@ -105,38 +106,42 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                         if (user != null) {
                             currentUser = user.getUid();
-                            System.out.println("00000000000000" + currentUser);
                         }
 
-                        //gets UID of the maps list
-                         uid = childSnapshot.getKey();
+                        //gets UID of each seller using the loop
+                         String uid = childSnapshot.getKey();
+                        getUserReview(uid);
+
+                        System.out.println(uid+  ": This is to check the UID");
 
                         if (uid.equals(currentUser)){
+                            //Hides Food if its from the same user
                             Toast.makeText(googleMaps2.this, "SAME USER", Toast.LENGTH_SHORT).show();
                         }else{
 
-                            System.out.println(currentUser + "&&&&&&&&&&&&&&&&&");
+                            //Gets Lat and lng from RTDB and convert to double
                             String latString = (String) childSnapshot.child("lat").getValue();
                             String lngString = (String) childSnapshot.child("lng").getValue();
                             double lat = Double.parseDouble(latString);
                             double lng = Double.parseDouble(lngString);
 
+                            //Gets the variables related to food and added into snippet
                             String Expiration = String.valueOf(snapshot.child(uid).child("Expiration").getValue());
                             String ProductName = String.valueOf(snapshot.child(uid).child("Product").getValue());
                             String brand = String.valueOf(snapshot.child(uid).child("brand").getValue());
 
-                            System.out.println(lat);
-                            System.out.println(lng);
 
-                            //Display the maps children in google maps using markers
+                            //Display the food in google maps using markers
                             userReference.child(uid).child("DisplayName").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     String displayName = dataSnapshot.getValue(String.class);
 
 
-                                    //get userReview per UID
-                                    double userReview = 4;
+                                    //get userReview per UID which determines the colour of marker
+                                    double userReview = average;
+
+
 
                                     //display marker
                                     final LatLng markerPosition = new LatLng(lat,lng);
@@ -146,9 +151,11 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
                                                     .title(displayName)
                                                     .snippet("ProductName: " + ProductName + "\n" +
                                                             "Brand: " + brand + "\n" +
-                                                            "Expiration: " + Expiration)
+                                                            "Expiration: " + Expiration + "\n" +
+                                                            "UID: " + uid)
                                                     .icon(BitmapDescriptorFactory.defaultMarker(getHueForReview(userReview))));
-                                                    //uses method to determine the colour of marker based on reviews
+                                                    //uses method getHueForReview() to determine the colour of marker based on reviews
+                                                    melbourne.setTag(uid);
                                 }
 
                                 @Override
@@ -171,7 +178,7 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
         });
 
 
-
+        //This is the box that appears when a marker is clicked
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
             @Override
             public View getInfoWindow(Marker marker) {
@@ -196,8 +203,9 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
         });
 
 
-        final LatLng melbourneLatLng = new LatLng(54.571975, -1.229416);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(melbourneLatLng));
+        //This is where the map will focus current focused on middlesbrough
+        final LatLng MiddlesbroughLatLng = new LatLng(54.571975, -1.229416);
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(MiddlesbroughLatLng));
 
 
         googleMap.setOnInfoWindowClickListener(this);
@@ -221,7 +229,9 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
         intent.putExtra("LONGITUDE",marker.getPosition().longitude);
         intent.putExtra("TITLE",marker.getTitle());
         intent.putExtra("SNIPPET", marker.getSnippet());
-        intent.putExtra("UID", uid);
+        String uidForClickedMarker = (String) marker.getTag();
+        intent.putExtra("UID", uidForClickedMarker);
+        System.out.println(uidForClickedMarker + ": This is from googleMaps2");
 
         // Start the TargetActivity
         startActivity(intent);
@@ -232,8 +242,8 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
 
     /*
      *
-     * On marker click change to pop up activity
-     * Send marker information
+     * Marker Click does nothing as user need to click the window pane instead
+     *
      *
      * */
     @Override
@@ -251,6 +261,37 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
         } else {
             return BitmapDescriptorFactory.HUE_GREEN;
         }
+    }
+
+    // Gets user review and calculates the average for a given UID
+    public void getUserReview(String uid) {
+        DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference userReviewReference = mDatabaseReference.child("Users").child(uid).child("Reviews");
+        userReviewReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                double sum = 0.0;
+                long count = snapshot.getChildrenCount();
+
+                // Loop through the children to get the review values and sum them
+                for (DataSnapshot reviewSnapshot : snapshot.getChildren()) {
+                    Double rating = reviewSnapshot.getValue(Double.class);
+                    sum += rating;
+                }
+
+                // Calculate the average, but check for division by zero
+                if (count != 0) {
+                    average = sum / count;
+                } else {
+                    average = 0.0;  // Set to zero if no reviews are present
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 

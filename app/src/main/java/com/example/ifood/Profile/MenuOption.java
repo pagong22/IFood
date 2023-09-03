@@ -16,7 +16,7 @@ import com.example.ifood.ShoppingList.ShoppingList_Main;
 
 public class MenuOption extends AppCompatActivity {
 
-    ConstraintLayout profile,recipe,settings,sold;
+    ConstraintLayout profile,recipe,settings,sold,currentItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +58,15 @@ public class MenuOption extends AppCompatActivity {
                 Intent intent = new Intent(MenuOption.this, soldProduct.class);
                 startActivity(intent);
 
+            }
+        });
+
+        currentItems = findViewById(R.id.mainMeni_itemOnMarket);
+        currentItems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MenuOption.this, itemOnMarket.class);
+                startActivity(intent);
             }
         });
 

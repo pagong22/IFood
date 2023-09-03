@@ -34,10 +34,8 @@ public class RecipeMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_main);
 
-        chickenButton = findViewById(R.id.recipePop_Youtube);
-        beefButton = findViewById(R.id.recipeBeef);
-        seafoodButton = findViewById(R.id.recipeSeafood);
-        userButton = findViewById(R.id.recipeUser);
+
+
 
         recyclerView = findViewById(R.id.recipe_displayRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(RecipeMain.this));
@@ -76,11 +74,6 @@ public class RecipeMain extends AppCompatActivity {
 
 
 
-        seafoodButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
 
     }
 

@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +16,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ifood.MainFeed.MainFeed;
 import com.example.ifood.R;
+import com.example.ifood.ShoppingList.ShoppingList_Main;
 import com.example.ifood.UserLogin.SignUpExtension;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -117,6 +120,8 @@ public class MainFeedPost extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void unused) {
                                 Toast.makeText(MainFeedPost.this, "Successful", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(MainFeedPost.this, MainFeed.class);
+                                startActivity(intent);
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
@@ -127,6 +132,8 @@ public class MainFeedPost extends AppCompatActivity {
                         });
             }
         });
+
+
 
 
 

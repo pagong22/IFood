@@ -46,7 +46,11 @@ public class Confirmation extends AppCompatActivity {
         Button recievedBtn = (Button) findViewById(R.id.confirmation_recieved);
 
         recievedBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(Confirmation.this, googleMaps2.class);
+            Intent intent = new Intent(Confirmation.this, UserReview.class);
+
+            //send seller ID to review page
+            intent.putExtra("SELLER_UID", UIDseller);
+
 
             DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference();
             DatabaseReference sellerReference = mDatabaseReference.child("Maps").child(UIDseller);

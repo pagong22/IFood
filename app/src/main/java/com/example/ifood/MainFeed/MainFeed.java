@@ -108,9 +108,6 @@ public class MainFeed extends AppCompatActivity {
 
         navigationBar();
 
-
-
-
     }
 
 

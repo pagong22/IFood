@@ -39,9 +39,12 @@ public class InformationPopUp extends AppCompatActivity {
             double longitude = getIntent().getDoubleExtra("LONGITUDE", 99999);
             String title = getIntent().getStringExtra("TITLE");
             String snippet = getIntent().getStringExtra("SNIPPET");
-            System.out.println("*********************************");
+
             UIDseller = getIntent().getStringExtra("UID");
-            System.out.println(getIntent().getStringExtra("UID"));
+
+            System.out.println(UIDseller + " :This is from informaton pop up");
+
+
             //The key argument here must match that used in the other activity
 
 
@@ -73,10 +76,7 @@ public class InformationPopUp extends AppCompatActivity {
                 }
             }
 
-            //set snippet into textview
-            System.out.println("ProductName: " + productName);
-            System.out.println("Brand: " + brand);
-            System.out.println("Expiration: " + expiration);
+
 
             SellerName.setText(title);
             ProductTitle.setText(productName);

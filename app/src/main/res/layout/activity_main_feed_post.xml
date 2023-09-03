@@ -52,13 +52,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_android_black_24dp" />
 
-    <TextView
-        android:id="@+id/mainFeed_postDisplayName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/mainFeed_postImg"
-        app:layout_constraintStart_toEndOf="@+id/mainFeed_postImg" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

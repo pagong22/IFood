@@ -3,11 +3,13 @@ package com.example.ifood.Maps;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
 
+import com.example.ifood.MainFeed.MainFeed;
 import com.example.ifood.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,6 +24,11 @@ public class UserReview extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_review);
+
+        //Recieve seller ID
+        Intent intent = getIntent();
+        String SELLER_UID = intent.getStringExtra("SELLER_UID");
+
 
 
         RatingBar ratingBar = findViewById(R.id.ratingBar);
@@ -40,10 +47,12 @@ public class UserReview extends AppCompatActivity {
             public void onClick(View view) {
 
                 DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference();
-                DatabaseReference userReviewReference = mDatabaseReference.child("Users").child("FZeJHns9vfNYlHgSiPZhVWyDv353").child("Reviews");
+                DatabaseReference userReviewReference = mDatabaseReference.child("Users").child(SELLER_UID).child("Reviews");
 
-
+                //save review into Users -> Review
                 userReviewReference.addListenerForSingleValueEvent(new ValueEventListener() {
+
+
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         // Get the current count of reviews
@@ -55,8 +64,12 @@ public class UserReview extends AppCompatActivity {
                             public void onComplete(DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                                 if (databaseError != null) {
                                     System.out.println("Data could not be saved. " + databaseError.getMessage());
+                                    Intent intent = new Intent(UserReview.this, MainFeed.class);
+                                    startActivity(intent);
                                 } else {
                                     System.out.println("Data saved successfully.");
+                                    Intent intent = new Intent(UserReview.this, MainFeed.class);
+                                    startActivity(intent);
                                 }
                             }
                         });
@@ -70,6 +83,8 @@ public class UserReview extends AppCompatActivity {
 
 
             }
+
+
         });
 
 

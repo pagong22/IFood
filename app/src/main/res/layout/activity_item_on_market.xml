@@ -8,116 +8,82 @@
     tools:context=".Maps.InformationPopUp">
 
     <TextView
-        android:id="@+id/textView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="54dp"
-        android:text="Product PopUp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView20" />
-
-    <TextView
         android:id="@+id/textView20"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:height="100px"
         android:background="#DDFFBB"
         android:gravity="center"
-        android:text="Food Overview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView21"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="39dp"
-        android:layout_marginTop="148dp"
-        android:text="Seller"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Item on Market" />
 
     <TextView
         android:id="@+id/textView22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
         android:text="Product Name"
-        app:layout_constraintStart_toStartOf="@+id/textView21"
-        app:layout_constraintTop_toBottomOf="@+id/textView21" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
     <TextView
         android:id="@+id/textView23"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="32dp"
         android:text="Expiration Date"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView22" />
+        app:layout_constraintEnd_toEndOf="@+id/textView22"
+        app:layout_constraintStart_toStartOf="@+id/textView22"
+        app:layout_constraintTop_toBottomOf="@+id/textView27" />
 
     <ImageView
-        android:id="@+id/popUp_BackBtn"
+        android:id="@+id/currentItem_backBtn"
         android:layout_width="25dp"
         android:layout_height="23dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView20"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/textView20"
+        app:layout_constraintTop_toTopOf="@+id/textView20"
         app:srcCompat="@drawable/back_arrow" />
 
     <TextView
         android:id="@+id/textView27"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="42dp"
+        android:layout_marginTop="32dp"
         android:text="Brand"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView23" />
-
-    <TextView
-        android:id="@+id/currentItem_Seller"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="33dp"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/textView15"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        app:layout_constraintEnd_toEndOf="@+id/textView22"
+        app:layout_constraintStart_toStartOf="@+id/textView22"
+        app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
     <TextView
         android:id="@+id/currentItem_ProductName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="1dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/currentItem_Seller"
-        app:layout_constraintTop_toBottomOf="@+id/currentItem_Seller" />
+        android:layout_marginStart="100dp"
+        android:text="No Items"
+        app:layout_constraintBottom_toBottomOf="@+id/textView22"
+        app:layout_constraintStart_toEndOf="@+id/textView22"
+        app:layout_constraintTop_toTopOf="@+id/textView22" />
 
     <TextView
         android:id="@+id/currentSeller_Expiration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="29dp"
-        android:layout_marginEnd="2dp"
-        android:text="TextView"
+        android:layout_marginTop="32dp"
+        android:text="No Items"
         app:layout_constraintEnd_toEndOf="@+id/currentItem_ProductName"
-        app:layout_constraintTop_toBottomOf="@+id/currentItem_ProductName" />
+        app:layout_constraintStart_toStartOf="@+id/currentItem_ProductName"
+        app:layout_constraintTop_toBottomOf="@+id/currentItem_Brand" />
 
     <TextView
         android:id="@+id/currentItem_Brand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="42dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/currentSeller_Expiration"
-        app:layout_constraintTop_toBottomOf="@+id/currentSeller_Expiration" />
+        android:layout_marginTop="32dp"
+        android:text="No Items"
+        app:layout_constraintEnd_toEndOf="@+id/currentItem_ProductName"
+        app:layout_constraintStart_toStartOf="@+id/currentItem_ProductName"
+        app:layout_constraintTop_toBottomOf="@+id/currentItem_ProductName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

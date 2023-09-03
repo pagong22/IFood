@@ -8,30 +8,15 @@
     tools:context=".Maps.InformationPopUp">
 
     <Button
-        android:id="@+id/popUp_Message"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="35dp"
-        android:backgroundTint="@color/Colour2"
-        android:text="Message"
-        android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="@+id/popUp_Buy"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/popUp_Buy"
-        app:layout_constraintTop_toTopOf="@+id/popUp_Buy" />
-
-    <Button
         android:id="@+id/popUp_Buy"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="41dp"
-        android:layout_marginEnd="142dp"
         android:layout_marginBottom="86dp"
         android:backgroundTint="@color/Colour2"
         android:text="Buy"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/popUp_Message"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView

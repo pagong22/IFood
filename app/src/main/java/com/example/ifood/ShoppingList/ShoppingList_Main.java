@@ -114,6 +114,10 @@ public class ShoppingList_Main extends AppCompatActivity {
                 itemList.add(new shoppingList_Model(productNameTemp, insertQuantityTemp));
                 // Notify the adapter that the data has changed
                 adapter.notifyDataSetChanged();
+
+                insertProduct.setText(""); //Clear Edit Text
+                insertQuantity.setText("");
+
             }
         });
 

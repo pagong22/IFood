@@ -142,7 +142,7 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
                                     double userReview = average;
 
 
-
+                                    
                                     //display marker
                                     final LatLng markerPosition = new LatLng(lat,lng);
                                     Marker melbourne = mMap.addMarker(

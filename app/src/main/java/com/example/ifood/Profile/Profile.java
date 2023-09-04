@@ -94,6 +94,8 @@ public class Profile extends AppCompatActivity {
                 double average = sum / snapshot.getChildrenCount();
                 userReview.setText(String.format("%.2f", average));
 
+                System.out.println("Testing for user average review:   " + average);
+
                 // Set the average value to the RatingBar
                 barReview.setRating((float) average);
             }

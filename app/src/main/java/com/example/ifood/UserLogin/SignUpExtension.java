@@ -65,6 +65,15 @@ public class SignUpExtension extends AppCompatActivity {
         Button Confirm = findViewById(R.id.signUpButton2);
 
         Button ChooseProfile = findViewById(R.id.signUp_ChooseProfile);
+
+
+
+
+
+
+
+
+
         ImageHolder = findViewById(R.id.signUp_ImagePlaceholder2);
 
 

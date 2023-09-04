@@ -33,10 +33,11 @@
         android:id="@+id/textView19"
         android:layout_width="141dp"
         android:layout_height="26dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="126dp"
         android:text="Product"
-        app:layout_constraintTop_toBottomOf="@+id/textView17"
-        tools:layout_editor_absoluteX="42dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
     <TextView
         android:id="@+id/textView25"

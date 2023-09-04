@@ -91,7 +91,7 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         //set map zoom levels
-        mMap.setMinZoomPreference(14.0f);
+        mMap.setMinZoomPreference(12.0f);
         mMap.setMaxZoomPreference(14.0f);
 
         DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference();

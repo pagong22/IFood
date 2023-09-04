@@ -15,6 +15,7 @@ import org.w3c.dom.Text;
 
 public class InformationPopUp extends AppCompatActivity {
     String UIDseller;
+    double latitude,longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +36,23 @@ public class InformationPopUp extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            double latitude = getIntent().getDoubleExtra("LATITUDE", 99999);
-            double longitude = getIntent().getDoubleExtra("LONGITUDE", 99999);
+            latitude = getIntent().getDoubleExtra("LATITUDE", 99999);
+            longitude = getIntent().getDoubleExtra("LONGITUDE", 99999);
             String title = getIntent().getStringExtra("TITLE");
             String snippet = getIntent().getStringExtra("SNIPPET");
 
+            System.out.println("This is a test for passing data (Lat) : " + latitude);
+            System.out.println("This is a test for passing data (Lng) : " + longitude);
+            System.out.println("This is a test for passing data (Title) : " + title);
+            System.out.println("This is a test for passing data (snippet) : " + snippet);
+
             UIDseller = getIntent().getStringExtra("UID");
 
-            System.out.println(UIDseller + " :This is from informaton pop up");
+
+
+            System.out.println("This is a test for passing data (Lat) : " + UIDseller);
+
+
 
 
             //The key argument here must match that used in the other activity
@@ -88,10 +98,14 @@ public class InformationPopUp extends AppCompatActivity {
 
 
         BuyButton.setOnClickListener(view -> {
+
+
             Intent intent = new Intent(InformationPopUp.this, Confirmation.class);
 
-
             intent.putExtra("SELLER_UID", UIDseller);
+            intent.putExtra("LATITUDE",latitude);
+            intent.putExtra("LONGITUDE",longitude);
+
 
 
 
@@ -100,7 +114,7 @@ public class InformationPopUp extends AppCompatActivity {
         });
 
         BackButton.setOnClickListener(view -> {
-            Intent intent = new Intent(InformationPopUp.this, googleMaps.class);
+            Intent intent = new Intent(InformationPopUp.this, googleMaps2.class);
 
             // Start the TargetActivity
             startActivity(intent);

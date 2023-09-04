@@ -20,8 +20,8 @@ public class RTDBTest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rtdbtest);
 
+        //fetch user location
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
@@ -29,16 +29,20 @@ public class RTDBTest extends AppCompatActivity {
         } else {
             requestLocationPermission();
         }
+
+
     }
 
+
+
+
+    //Fetch last known location of the device
     private void fetchLocation() {
         try {
             fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location -> {
                 if (location != null) {
                     double latitude = location.getLatitude();
                     double longitude = location.getLongitude();
-                    // Do whatever you want with these coordinates
-
 
                     System.out.println(latitude+"@@@@@@@@@@@@@@@@@@@@@@@");
                     System.out.println(longitude);
@@ -49,10 +53,13 @@ public class RTDBTest extends AppCompatActivity {
         }
     }
 
+    //Request necessary location permision from the user at run time
     private void requestLocationPermission() {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
     }
 
+
+    //This method is used  when the user responds to a permision request dialog
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_LOCATION_PERMISSION) {
@@ -60,8 +67,9 @@ public class RTDBTest extends AppCompatActivity {
                 // Permission was granted. Fetch location.
                 fetchLocation();
             } else {
-                // Permission denied. You can optionally alert the user or handle this situation as required.
+                // Permission denied
             }
         }
     }
+
 }

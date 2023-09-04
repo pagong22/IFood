@@ -41,6 +41,7 @@ public class Login extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        //get current user
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
             Intent i = new Intent(Login.this, MainFeed.class);
@@ -48,7 +49,6 @@ public class Login extends AppCompatActivity {
             finish();
 
         }
-
 
 
        // getSupportActionBar().hide();
@@ -82,24 +82,10 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
                 String userEmail = TextuserEmail.getText().toString();
                 String userPassword = TextuserPassword.getText().toString();
 
                 signIn(userEmail,userPassword);
-
-
-//                FirebaseDatabase database = FirebaseDatabase.getInstance();
-//                DatabaseReference myRef = database.getReference("message");
-//
-//                myRef.setValue("Hello, World!");
-
-
-
-
-
-
-
             }
         });
     }
@@ -115,8 +101,9 @@ public class Login extends AppCompatActivity {
                                     "Login Successful", Toast.LENGTH_LONG).show();
                             Intent i = new Intent(Login.this, MainFeed.class);
                             startActivity(i);
-                            finish();
 
+                            //finish removes activity from back stack prevent user from going back to login page
+                            finish();
 
                         } else {
                             // If sign in fails, display a message to the user.

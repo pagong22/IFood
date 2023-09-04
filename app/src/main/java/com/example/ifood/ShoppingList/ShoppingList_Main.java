@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.ifood.MainFeed.MainFeed;
 import com.example.ifood.Maps.googleMaps;
+import com.example.ifood.Maps.googleMaps2;
 import com.example.ifood.Profile.MenuOption;
 import com.example.ifood.R;
 import com.google.android.gms.maps.model.LatLng;
@@ -141,7 +142,7 @@ public class ShoppingList_Main extends AppCompatActivity {
         });
 
         mapsButton.setOnClickListener(view -> {
-            Intent intent = new Intent(ShoppingList_Main.this, googleMaps.class);
+            Intent intent = new Intent(ShoppingList_Main.this, googleMaps2.class);
             startActivity(intent);
         });
 

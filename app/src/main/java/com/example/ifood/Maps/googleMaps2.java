@@ -309,7 +309,7 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
         });
 
         mapsButton.setOnClickListener(view -> {
-            Intent intent = new Intent(googleMaps2.this, googleMaps.class);
+            Intent intent = new Intent(googleMaps2.this, googleMaps2.class);
             startActivity(intent);
         });
 

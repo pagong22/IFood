@@ -13,9 +13,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.ifood.MainFeed.MainFeed;
+import com.example.ifood.Maps.googleMaps2;
+import com.example.ifood.Profile.MenuOption;
 import com.example.ifood.R;
 import com.example.ifood.Recipe.Meal;
 import com.example.ifood.Recipe.MealResponse;
+import com.example.ifood.Recipe.RecipeMain;
+import com.example.ifood.ShoppingList.ShoppingList_Main;
 import com.example.ifood.ShoppingList.shoppingList_Model;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -169,6 +175,7 @@ public class RecipePopUp extends AppCompatActivity {
         });
 
 
+        navigationBar();
 
     }
 
@@ -189,6 +196,36 @@ public class RecipePopUp extends AppCompatActivity {
         });
 
     }
+
+    public void navigationBar() {
+        ImageView homeButton = findViewById(R.id.nav_home);
+        ImageView reminderButton = findViewById(R.id.nav_reminder);
+        ImageView mapsButton = findViewById(R.id.nav_maps);
+        ImageView profileButton = findViewById(R.id.nav_profile);
+
+        homeButton.setOnClickListener(view -> {
+            Intent intent = new Intent(RecipePopUp.this, MainFeed.class);
+            startActivity(intent);
+        });
+
+        reminderButton.setOnClickListener(view -> {
+            Intent intent = new Intent(RecipePopUp.this, ShoppingList_Main.class);
+            startActivity(intent);
+        });
+
+        mapsButton.setOnClickListener(view -> {
+            Intent intent = new Intent(RecipePopUp.this, googleMaps2.class);
+            startActivity(intent);
+        });
+
+        profileButton.setOnClickListener(view -> {
+            Intent intent = new Intent(RecipePopUp.this, MenuOption.class);
+            startActivity(intent);
+        });
+    }
+
+
+
 
 
 }

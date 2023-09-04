@@ -4,11 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
+import com.example.ifood.MainFeed.MainFeed;
+import com.example.ifood.Maps.googleMaps2;
+import com.example.ifood.Profile.MenuOption;
 import com.example.ifood.R;
+import com.example.ifood.Recipe.popUp.RecipeAdd;
+import com.example.ifood.ShoppingList.ShoppingList_Main;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,11 +79,38 @@ public class RecipeMain extends AppCompatActivity {
         });
 
 
+        navigationBar();
 
 
 
     }
 
+    public void navigationBar() {
+        ImageView homeButton = findViewById(R.id.nav_home);
+        ImageView reminderButton = findViewById(R.id.nav_reminder);
+        ImageView mapsButton = findViewById(R.id.nav_maps);
+        ImageView profileButton = findViewById(R.id.nav_profile);
+
+        homeButton.setOnClickListener(view -> {
+            Intent intent = new Intent(RecipeMain.this, MainFeed.class);
+            startActivity(intent);
+        });
+
+        reminderButton.setOnClickListener(view -> {
+            Intent intent = new Intent(RecipeMain.this, ShoppingList_Main.class);
+            startActivity(intent);
+        });
+
+        mapsButton.setOnClickListener(view -> {
+            Intent intent = new Intent(RecipeMain.this, googleMaps2.class);
+            startActivity(intent);
+        });
+
+        profileButton.setOnClickListener(view -> {
+            Intent intent = new Intent(RecipeMain.this, MenuOption.class);
+            startActivity(intent);
+        });
+    }
 
 
 

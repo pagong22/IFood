@@ -17,17 +17,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.sql.SQLOutput;
 import java.util.Random;
 
 public class Confirmation extends AppCompatActivity {
 
     String UIDseller;
+    double lat, lng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirmation);
 
+        //Create 4 digit randomize number
         Random random = new Random();
         int code = random.nextInt(9000) + 1000;
 
@@ -37,8 +40,19 @@ public class Confirmation extends AppCompatActivity {
 
         UIDseller = getIntent().getStringExtra("SELLER_UID");
 
+
+        lat = getIntent().getDoubleExtra("LATITUDE", 99999);
+        lng = getIntent().getDoubleExtra("LONGITUDE", 99999);
+
         System.out.println(UIDseller);
-        System.out.println("88888888888888880808080808080808");
+        System.out.println(lat);
+        System.out.println(lng);
+
+        System.out.println("This is a test for recieving data from Information PopUp (UID) : " + UIDseller);
+        System.out.println("This is a test for recieving data from Information PopUp (lat) : " + lat);
+        System.out.println("This is a test for recieving data from Information PopUp (lng) : " + lng);
+
+
 
 
 
@@ -56,7 +70,7 @@ public class Confirmation extends AppCompatActivity {
             DatabaseReference sellerReference = mDatabaseReference.child("Maps").child(UIDseller);
             DatabaseReference sellerHistory = mDatabaseReference.child("Users").child(UIDseller).child("soldItem");
 
-// Fetch the seller's product
+            // Fetch the seller's product
             sellerReference.child("Product").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -90,9 +104,13 @@ public class Confirmation extends AppCompatActivity {
                 }
             });
 
-
-            //Delete sellers item
-            //sellerReference.removeValue();
+            /***
+             *
+             * Delete sellers item
+             * If commented out it was used for testing prevents adding new item every test
+             *
+             * ***/
+            sellerReference.removeValue();
 
             // Start the TargetActivity
             startActivity(intent);
@@ -100,19 +118,21 @@ public class Confirmation extends AppCompatActivity {
 
         });
 
-
+        /**
+         * Opens google maps and navigate to sellers location
+         * **/
         Button navigateBtn = (Button) findViewById(R.id.confirmation_navigate);
 
         navigateBtn.setOnClickListener(view -> {
-            Uri gmmIntentUri = Uri.parse("google.navigation:q=54.57612901016541,-1.2330211653532375");
+            // Use the lat and lng values that were passed into this activity
+            Uri gmmIntentUri = Uri.parse("google.navigation:q=" + lat + "," + lng);
+
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
             mapIntent.setPackage("com.google.android.apps.maps");
             if (mapIntent.resolveActivity(getPackageManager()) != null) {
                 startActivity(mapIntent);
             }
-
         });
-
 
 
 

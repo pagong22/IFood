@@ -50,17 +50,14 @@ public class Login extends AppCompatActivity {
 
         }
 
-
        // getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
 
         ImageView Logo1 = findViewById(R.id.LoginLogo1);
         ImageView Logo2 = findViewById(R.id.LoginLogi2);
         Button LoginButton = findViewById(R.id.LoginButton);
         EditText TextuserEmail = findViewById(R.id.LoginUsername);
         EditText TextuserPassword = findViewById(R.id.LoginPassword);
-
 
         Logo1.setOnClickListener(new View.OnClickListener() {
             @Override

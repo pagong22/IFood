@@ -46,9 +46,6 @@ public class ShoppingList_Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_list_main);
 
-//        itemList.add(new shoppingList_Model("lemon","2"));
-//        itemList.add(new shoppingList_Model("grapes","5"));
-//        itemList.add(new shoppingList_Model("orange","3"));
 
         //Add to RTDB
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -62,11 +59,11 @@ public class ShoppingList_Main extends AppCompatActivity {
         userReference.child(uid).child("shoppingList").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-//                String displayName = dataSnapshot.getValue(String.class);
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     String ingredient = snapshot.getKey();
                     String measurement = snapshot.getValue(String.class);
+                    //create object and add to list
                     itemList.add(new shoppingList_Model(ingredient, measurement));
 
                     recyclerView = findViewById(R.id.recyclerViewShoppingList);

@@ -46,9 +46,11 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        //Calls the method that get users details and display on activity
         displayUserDetails();
 
 
+        //Close user token in application
         Button LogoutButton = findViewById(R.id.signoutButton);
         LogoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +77,7 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+        //Display user review
         TextView userReview = findViewById(R.id.profile_AverageReviews);
         RatingBar barReview = findViewById(R.id.profile_ratingBar);
         DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference();
@@ -107,16 +110,9 @@ public class Profile extends AppCompatActivity {
         });
 
 
-
-
-
-
     }
 
 
-    public void getUserProfile() {
-
-    }
 
     public void displayUserDetails(){
 

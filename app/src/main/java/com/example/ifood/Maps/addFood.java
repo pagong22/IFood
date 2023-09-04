@@ -51,12 +51,14 @@ public class addFood extends AppCompatActivity {
             uid = user.getUid();
         }
 
+        //User Location
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         initLocationUpdates();
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         DatabaseReference userRef = mDatabase.child("Maps");
 
+        //Add new food to real time database
         Button confirmBtn = findViewById(R.id.mapsAdd_confirmBtn);
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +75,7 @@ public class addFood extends AppCompatActivity {
         });
     }
 
+
     private void initLocationUpdates() {
         // Create a location request
         LocationRequest locationRequest = LocationRequest.create();
@@ -86,13 +89,21 @@ public class addFood extends AppCompatActivity {
                 if (locationResult != null) {
                     latitude = locationResult.getLastLocation().getLatitude();
                     longitude = locationResult.getLastLocation().getLongitude();
-                    System.out.println(latitude + "@@@@@@@@@@@@@@@@@@@@@@@");
-                    System.out.println(longitude);
                 }
             }
         };
 
-        // Request location updates
+
+        /***
+         *
+         * It shows red line error on missing permision
+         * PERMISSION is in manifest code works just a bugged error indicator
+         *
+         * Possibly a bug in android studio
+         *
+         * ***/
+
+        // Request location updates.
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null);

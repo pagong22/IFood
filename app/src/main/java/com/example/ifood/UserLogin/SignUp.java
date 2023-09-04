@@ -48,7 +48,7 @@ public class SignUp extends AppCompatActivity {
 
 
 
-
+    //Firebase method to create new user
     public void signUpFirebase(String userEmail, String userPassword){
 
         auth.createUserWithEmailAndPassword(userEmail, userPassword)

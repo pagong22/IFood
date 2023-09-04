@@ -16,6 +16,13 @@ import com.example.ifood.ShoppingList.ShoppingList_Main;
 
 public class MenuOption extends AppCompatActivity {
 
+    /****
+     * This is just the menu option
+     *
+     * Currently settings has no functionality (future implementation)
+     *
+     * ***/
+
     ConstraintLayout profile,recipe,settings,sold,currentItems;
 
     @Override

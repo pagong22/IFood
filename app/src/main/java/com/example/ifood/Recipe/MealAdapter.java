@@ -44,18 +44,11 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MealViewHolder
                 .into(holder.MealImage);
 
 
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), RecipePopUp.class);
-
                 intent.putExtra("FOOD_ID", meal.getIdMeal());
-
-
-
-
-
                 view.getContext().startActivity(intent);
             }
         });

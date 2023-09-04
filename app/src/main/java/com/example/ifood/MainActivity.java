@@ -31,6 +31,10 @@ import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     * Maps testing purposes
+     * **/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

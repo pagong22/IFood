@@ -50,6 +50,7 @@ public class itemOnMarket extends AppCompatActivity {
                     //Gets UID of looped maps
                     uid = childSnapshot.getKey();
 
+                    //If uid matches currentUsers uid in Maps database get data and display on this activity
                     if (uid.equals(currentUser)){
 
                         String latString = (String) childSnapshot.child("lat").getValue();

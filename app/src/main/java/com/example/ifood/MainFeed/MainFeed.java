@@ -60,14 +60,18 @@ public class MainFeed extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 itemList.clear(); // Clear the list to prevent repetition
+
+                //loop through Feed children
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     String uid = postSnapshot.child("UID").getValue(String.class);
                     String post = postSnapshot.child("post").getValue(String.class);
 
+                    //Each loop get users display name and photo
                     DatabaseReference userRef = mDatabaseReference.child("Users").child(uid);
                     userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot userSnapshot) {
+                            //get display name of
                             String displayName = userSnapshot.child("DisplayName").getValue(String.class);
 
                             StorageReference storageRef = FirebaseStorage.getInstance().getReference();
@@ -75,7 +79,7 @@ public class MainFeed extends AppCompatActivity {
                                 itemList.add(new MainFeedModel(displayName, uri.toString(), post));
 
 
-                                // Reverse the list
+                                // Reverse the list to place newest post at the top of recycler view
                                 Collections.reverse(itemList);
                                 adapter.notifyDataSetChanged();
 

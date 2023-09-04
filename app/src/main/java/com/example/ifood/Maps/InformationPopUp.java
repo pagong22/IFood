@@ -41,21 +41,18 @@ public class InformationPopUp extends AppCompatActivity {
             String title = getIntent().getStringExtra("TITLE");
             String snippet = getIntent().getStringExtra("SNIPPET");
 
+            //This is for testing purposes
             System.out.println("This is a test for passing data (Lat) : " + latitude);
             System.out.println("This is a test for passing data (Lng) : " + longitude);
             System.out.println("This is a test for passing data (Title) : " + title);
             System.out.println("This is a test for passing data (snippet) : " + snippet);
 
             UIDseller = getIntent().getStringExtra("UID");
-
-
-
             System.out.println("This is a test for passing data (Lat) : " + UIDseller);
 
 
 
 
-            //The key argument here must match that used in the other activity
 
 
 
@@ -87,7 +84,7 @@ public class InformationPopUp extends AppCompatActivity {
             }
 
 
-
+            //Set the split snippets into different textViews
             SellerName.setText(title);
             ProductTitle.setText(productName);
             ExpirationDate.setText(expiration);
@@ -98,16 +95,12 @@ public class InformationPopUp extends AppCompatActivity {
 
 
         BuyButton.setOnClickListener(view -> {
-
-
             Intent intent = new Intent(InformationPopUp.this, Confirmation.class);
 
+            //Send required information to the next activity
             intent.putExtra("SELLER_UID", UIDseller);
             intent.putExtra("LATITUDE",latitude);
             intent.putExtra("LONGITUDE",longitude);
-
-
-
 
             // Start the TargetActivity
             startActivity(intent);

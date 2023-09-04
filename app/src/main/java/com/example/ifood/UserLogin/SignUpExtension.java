@@ -63,36 +63,16 @@ public class SignUpExtension extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up_extension);
 
         Button Confirm = findViewById(R.id.signUpButton2);
-
         Button ChooseProfile = findViewById(R.id.signUp_ChooseProfile);
-
-
-
-
-
-
-
-
-
         ImageHolder = findViewById(R.id.signUp_ImagePlaceholder2);
-
 
 
         //Firebase RTDB
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        //Firebase Authentication
-//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//
-//        String getBio = String.valueOf(BioInput.getText());
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            // Name, email address, and profile photo Url
-//            String name = user.getDisplayName();
-//            String email = user.getEmail();
-//            Uri photoUrl = user.getPhotoUrl();
             uid = user.getUid();
-
         }
 
         //Opens gallery when intent used
@@ -185,8 +165,6 @@ public class SignUpExtension extends AppCompatActivity {
                             if (data != null) {
                                 selectedImageUri = data.getData();
                                 String uriString = selectedImageUri.toString();
-                                //uriCode.setText(uriString);
-                              //  System.out.println(uriString + "==@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
                                 ImageHolder.setImageURI(selectedImageUri);
 
                             }
@@ -204,13 +182,9 @@ public class SignUpExtension extends AppCompatActivity {
         String getDisplayName = String.valueOf(DisplayNameInput.getText());
 
 
-
-
         //get Bio and stores it into Real time database
         EditText BioInput = findViewById(R.id.signUp_Bio2);
         String getUserBio = String.valueOf(BioInput.getText());
-
-
 
 
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
@@ -229,7 +203,6 @@ public class SignUpExtension extends AppCompatActivity {
     }
 
     public void updateProfileRTDB(){
-
         //get edit text and store the value of displayname
         EditText DisplayNameInput = findViewById(R.id.signUpName);
         String getDisplayName = String.valueOf(DisplayNameInput.getText());
@@ -239,7 +212,7 @@ public class SignUpExtension extends AppCompatActivity {
         String getUserBio = String.valueOf(BioInput.getText());
 
         DatabaseReference mDatabase;
-// ...
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mDatabase.child("Users").child(uid).child("DisplayName").setValue(getDisplayName).addOnSuccessListener(new OnSuccessListener<Void>() {

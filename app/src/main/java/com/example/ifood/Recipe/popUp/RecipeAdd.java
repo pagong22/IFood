@@ -8,6 +8,11 @@ import com.example.ifood.R;
 
 public class RecipeAdd extends AppCompatActivity {
 
+    /**
+     * Future implementations
+     * **/
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

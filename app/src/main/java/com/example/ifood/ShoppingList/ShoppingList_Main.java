@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.ifood.MainFeed.MainFeed;
 import com.example.ifood.Maps.googleMaps;
+import com.example.ifood.Maps.googleMaps2;
 import com.example.ifood.Profile.MenuOption;
 import com.example.ifood.R;
 import com.google.android.gms.maps.model.LatLng;
@@ -46,9 +47,6 @@ public class ShoppingList_Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_list_main);
 
-//        itemList.add(new shoppingList_Model("lemon","2"));
-//        itemList.add(new shoppingList_Model("grapes","5"));
-//        itemList.add(new shoppingList_Model("orange","3"));
 
         //Add to RTDB
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -62,11 +60,11 @@ public class ShoppingList_Main extends AppCompatActivity {
         userReference.child(uid).child("shoppingList").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-//                String displayName = dataSnapshot.getValue(String.class);
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     String ingredient = snapshot.getKey();
                     String measurement = snapshot.getValue(String.class);
+                    //create object and add to list
                     itemList.add(new shoppingList_Model(ingredient, measurement));
 
                     recyclerView = findViewById(R.id.recyclerViewShoppingList);
@@ -144,7 +142,7 @@ public class ShoppingList_Main extends AppCompatActivity {
         });
 
         mapsButton.setOnClickListener(view -> {
-            Intent intent = new Intent(ShoppingList_Main.this, googleMaps.class);
+            Intent intent = new Intent(ShoppingList_Main.this, googleMaps2.class);
             startActivity(intent);
         });
 

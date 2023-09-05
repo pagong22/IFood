@@ -50,7 +50,6 @@ public class Login extends AppCompatActivity {
 
         }
 
-       // getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         ImageView Logo1 = findViewById(R.id.LoginLogo1);
@@ -87,6 +86,8 @@ public class Login extends AppCompatActivity {
         });
     }
 
+
+    //firebase method to log in
     private void signIn(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {

@@ -13,9 +13,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.ifood.MainFeed.MainFeed;
+import com.example.ifood.Maps.googleMaps2;
+import com.example.ifood.Profile.MenuOption;
 import com.example.ifood.R;
 import com.example.ifood.Recipe.Meal;
 import com.example.ifood.Recipe.MealResponse;
+import com.example.ifood.Recipe.RecipeMain;
+import com.example.ifood.ShoppingList.ShoppingList_Main;
 import com.example.ifood.ShoppingList.shoppingList_Model;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -58,11 +64,11 @@ public class RecipePopUp extends AppCompatActivity {
         setContentView(R.layout.activity_recipe_pop_up);
 
 
-        //recieve data from recipeMain
-
+        //recieve MealID of chosen recipe
         String MealID = getIntent().getStringExtra("FOOD_ID");
 
 
+        //Call API using retrofit
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://www.themealdb.com/api/json/v1/1/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -91,16 +97,19 @@ public class RecipePopUp extends AppCompatActivity {
                             .into(foodThumb);
 
 
-
+                    //Loop  through ingredients and quantity. 10 is hard coded since the api has a maximum of 10 ingredients
                     for (int i = 1; i <= 10; i++) {
                         try {
+
                             Method ingredientMethod = meal.getClass().getMethod("getStrIngredient" + i);
                             Method measurementMethod = meal.getClass().getMethod("getStrMeasure" + i);
 
                             String ingredient = (String) ingredientMethod.invoke(meal);
                             String measurement = (String) measurementMethod.invoke(meal);
 
+                            //Check if ingredients is null some recipe dont have 10 ingredients
                             if (ingredient != null && !ingredient.trim().isEmpty()) {
+                                //add to list
                                 ingredientList.add(new IngredientModel(ingredient, measurement));
                             }
                         } catch (Exception e) {
@@ -128,7 +137,7 @@ public class RecipePopUp extends AppCompatActivity {
             }
         });
 
-
+        //Save the recipe ingredient to users shopping list
         Button saveToShopping = findViewById(R.id.recipePop_addShoppingList);
         saveToShopping.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,6 +175,7 @@ public class RecipePopUp extends AppCompatActivity {
         });
 
 
+        navigationBar();
 
     }
 
@@ -186,6 +196,36 @@ public class RecipePopUp extends AppCompatActivity {
         });
 
     }
+
+    public void navigationBar() {
+        ImageView homeButton = findViewById(R.id.nav_home);
+        ImageView reminderButton = findViewById(R.id.nav_reminder);
+        ImageView mapsButton = findViewById(R.id.nav_maps);
+        ImageView profileButton = findViewById(R.id.nav_profile);
+
+        homeButton.setOnClickListener(view -> {
+            Intent intent = new Intent(RecipePopUp.this, MainFeed.class);
+            startActivity(intent);
+        });
+
+        reminderButton.setOnClickListener(view -> {
+            Intent intent = new Intent(RecipePopUp.this, ShoppingList_Main.class);
+            startActivity(intent);
+        });
+
+        mapsButton.setOnClickListener(view -> {
+            Intent intent = new Intent(RecipePopUp.this, googleMaps2.class);
+            startActivity(intent);
+        });
+
+        profileButton.setOnClickListener(view -> {
+            Intent intent = new Intent(RecipePopUp.this, MenuOption.class);
+            startActivity(intent);
+        });
+    }
+
+
+
 
 
 }

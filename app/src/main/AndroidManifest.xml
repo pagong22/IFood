@@ -67,13 +67,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ShoppingList_Add"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".ShoppingList.ShoppingList_Main"
             android:exported="true"
             android:windowSoftInputMode="adjustNothing">
@@ -82,7 +75,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".RecipeAdd"
+            android:name=".Recipe.popUp.RecipeAdd"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -203,13 +196,6 @@
         <activity
             android:name=".RTDBTest"
             android:exported="true">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Profile.EditProfile"
-            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

@@ -37,17 +37,13 @@ public class Confirmation extends AppCompatActivity {
         TextView myTextView = (TextView) findViewById(R.id.confirmation_Code);
         myTextView.setText(String.valueOf(code));
 
-
+        //get data from previous activity
         UIDseller = getIntent().getStringExtra("SELLER_UID");
-
-
         lat = getIntent().getDoubleExtra("LATITUDE", 99999);
         lng = getIntent().getDoubleExtra("LONGITUDE", 99999);
 
-        System.out.println(UIDseller);
-        System.out.println(lat);
-        System.out.println(lng);
 
+        //Testing purposes
         System.out.println("This is a test for recieving data from Information PopUp (UID) : " + UIDseller);
         System.out.println("This is a test for recieving data from Information PopUp (lat) : " + lat);
         System.out.println("This is a test for recieving data from Information PopUp (lng) : " + lng);
@@ -58,7 +54,6 @@ public class Confirmation extends AppCompatActivity {
 
 
         Button recievedBtn = (Button) findViewById(R.id.confirmation_recieved);
-
         recievedBtn.setOnClickListener(view -> {
             Intent intent = new Intent(Confirmation.this, UserReview.class);
 

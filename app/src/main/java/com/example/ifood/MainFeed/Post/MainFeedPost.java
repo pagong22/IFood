@@ -40,8 +40,6 @@ import java.util.Map;
 
 public class MainFeedPost extends AppCompatActivity {
 
-    ImageView userIcon;
-    TextView displayName;
     EditText userPost;
     Button postBtn;
     String uid;
@@ -110,7 +108,7 @@ public class MainFeedPost extends AppCompatActivity {
                 postValues.put("UID", uid);
                 postValues.put("post", userpost);
                 /*
-                * Count increment by itself because when u get children count it retern the number of children
+                * Count increment by itself because when you get children count it retern the number of children
                 * However database position starts at 0 therefore it creates a new child similar to incrementation
                 * */
                 mDatabase.child("Feed")

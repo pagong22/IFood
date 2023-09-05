@@ -45,9 +45,6 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private List<Marker> markers = new ArrayList<Marker>();
     private double average;
-
-
-
     String currentUser;
 
 
@@ -56,6 +53,7 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_maps);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -73,16 +71,6 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
         navigationBar();
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     *
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
 
 
 
@@ -103,6 +91,8 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //loop through all food in the database
                     for (DataSnapshot childSnapshot : snapshot.getChildren()) {
+
+                        //This gets the UID of current logged in user
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                         if (user != null) {
                             currentUser = user.getUid();
@@ -110,14 +100,18 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
 
                         //gets UID of each seller using the loop
                          String uid = childSnapshot.getKey();
+
+                        //Method is to get the review rating of the seller
                         getUserReview(uid);
 
+                        //Testing purposes
                         System.out.println(uid+  ": This is to check the UID");
 
+                        //prevents current user to see their own item on the map
                         if (uid.equals(currentUser)){
-                            //Hides Food if its from the same user
                             Toast.makeText(googleMaps2.this, "SAME USER", Toast.LENGTH_SHORT).show();
                         }else{
+                            //If its not from the current user display the item on the map
 
                             //Gets Lat and lng from RTDB and convert to double
                             String latString = (String) childSnapshot.child("lat").getValue();
@@ -145,7 +139,7 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
 
                                     //display marker
                                     final LatLng markerPosition = new LatLng(lat,lng);
-                                    Marker melbourne = mMap.addMarker(
+                                    Marker item = mMap.addMarker(
                                             new MarkerOptions()
                                                     .position(markerPosition)
                                                     .title(displayName)
@@ -155,7 +149,7 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
                                                             "UID: " + uid)
                                                     .icon(BitmapDescriptorFactory.defaultMarker(getHueForReview(userReview))));
                                                     //uses method getHueForReview() to determine the colour of marker based on reviews
-                                                    melbourne.setTag(uid);
+                                                    item.setTag(uid);
                                 }
 
                                 @Override
@@ -315,7 +309,7 @@ public class googleMaps2 extends AppCompatActivity implements OnMapReadyCallback
         });
 
         mapsButton.setOnClickListener(view -> {
-            Intent intent = new Intent(googleMaps2.this, googleMaps.class);
+            Intent intent = new Intent(googleMaps2.this, googleMaps2.class);
             startActivity(intent);
         });
 

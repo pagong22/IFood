@@ -30,9 +30,8 @@ public class UserReview extends AppCompatActivity {
         String SELLER_UID = intent.getStringExtra("SELLER_UID");
 
 
-
+        //Rating bar v is the value of the filled out rating
         RatingBar ratingBar = findViewById(R.id.ratingBar);
-
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
@@ -40,6 +39,7 @@ public class UserReview extends AppCompatActivity {
 
             }
         });
+
 
         Button submitReview = findViewById(R.id.review_SubmitBtn);
         submitReview.setOnClickListener(new View.OnClickListener() {

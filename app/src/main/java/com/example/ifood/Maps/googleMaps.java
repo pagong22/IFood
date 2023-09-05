@@ -29,6 +29,23 @@ import com.example.ifood.R;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+
+/***
+ *
+ *
+ *
+ *
+ * Important:
+ *
+ * This activity is only used for testing purposes
+ *
+ *
+ *
+ *
+ * ***/
+
 public class googleMaps extends AppCompatActivity implements OnMapReadyCallback, OnInfoWindowClickListener, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
@@ -55,18 +72,6 @@ public class googleMaps extends AppCompatActivity implements OnMapReadyCallback,
         });
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     *
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
-
-
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
@@ -75,28 +80,6 @@ public class googleMaps extends AppCompatActivity implements OnMapReadyCallback,
         //set map zoom levels
         mMap.setMinZoomPreference(14.0f);
         mMap.setMaxZoomPreference(14.0f);
-
-        // Add a marker in Sydney and move the camera
-//        LatLng kyoto = new LatLng(35.00116, 135.7681);
-//        LatLng sydney = new LatLng(-34, 151);
-//
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-//       mMap.addMarker(new MarkerOptions().position(kyoto).title("Marker in kyoto"));
-//
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(kyoto));
-
-
-//        final LatLng melbourneLocation = new LatLng(-37.813, 144.962);
-//        Marker melbourne = mMap.addMarker(
-//                new MarkerOptions()
-//                        .position(melbourneLocation)
-//                        .title("Melbourne")
-//                        .snippet("Population: 4,137,400")
-//                        .melbourne.showInfoWindow()
-//                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.img_2)).flat(true));
-
-
-
 
         final LatLng melbourneLatLng = new LatLng(54.571975, -1.229416);
         Marker melbourne = mMap.addMarker(

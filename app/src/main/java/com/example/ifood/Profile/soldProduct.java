@@ -34,7 +34,6 @@ public class soldProduct extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             uid = user.getUid();
-            System.out.println(uid + "%%%%%%%%%%%%%");
         }
 
         DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference();
@@ -59,7 +58,7 @@ public class soldProduct extends AppCompatActivity {
                     String productName = productSnapshot.getValue(String.class);
                     products.add(productName);  // Add the combined string to the list
                 }
-                adapter.notifyDataSetChanged();  // Notify the adap
+                adapter.notifyDataSetChanged();  // Updates view
 
             }
 

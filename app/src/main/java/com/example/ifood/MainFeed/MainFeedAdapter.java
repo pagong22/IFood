@@ -36,18 +36,11 @@ public class MainFeedAdapter extends RecyclerView.Adapter<MainFeedAdapter.ViewHo
         holder.userName.setText(item.getUserName());
         holder.post.setText(item.getPost());
 
-//
+
         String imageUrl = item.getUserImage();
         Picasso.get()
                 .load(imageUrl)
                 .into(holder.userIcon);
-
-
-
-
-
-
-
 
     }
 
